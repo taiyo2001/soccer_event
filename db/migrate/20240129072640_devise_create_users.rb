@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :email,              null: false, default: ""
       t.integer :age,               null: false
       t.string :gender,             null: false
-      t.references :favorite_team,  null: false, foreign_key: { to_table: :teams }
+      t.references :favorite_team,  foreign_key: { to_table: :teams }
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
