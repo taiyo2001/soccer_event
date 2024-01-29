@@ -1,4 +1,4 @@
-name: Run Rubocop Brakeman
+name: Run Rubocop ERB-Lint Brakeman
 run-name: CI
 on:
   push:
