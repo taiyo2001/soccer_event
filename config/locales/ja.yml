@@ -25,6 +25,10 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        name: 名前
+        age: 年齢
+        gender: 性別
+        favorite_team: お気に入りのチーム
     models:
       user: ユーザー
   devise:
@@ -99,6 +103,7 @@ ja:
         title: "%{resource}編集"
         unhappy: 気に入りません
         update: 更新
+        back: 戻る
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
         sign_up: アカウント登録
