@@ -1,6 +1,5 @@
 class TeamCommentsController < ApplicationController
   def create
-    debugger
     @team_comment = TeamComment.new(team_comment_params)
     @team_comment.user = current_user
 
