@@ -18,6 +18,20 @@
       <p><%= alert %></p>
     <% end %>
 
+    <header>
+      <ul>
+        <% if user_signed_in? %>
+          <%# TODO: link_toのコメントアウトを削除する %>
+          <li><%# link_to 'イベント一覧', events_path %></li>
+          <li><%# link_to 'ユーザ一覧', users_path %></li>
+          <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </header>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
