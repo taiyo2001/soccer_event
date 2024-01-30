@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :teams, only: [:show]
+  resources :leagues, only: %i[index show]
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
