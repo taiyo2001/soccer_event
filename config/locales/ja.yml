@@ -136,6 +136,13 @@ ja:
       send_instructions: アカウントのロック解除方法を数分以内にメールでご連絡します。
       send_paranoid_instructions: アカウントが見つかった場合、アカウントのロック解除方法を数分以内にメールでご連絡します。
       unlocked: アカウントをロック解除しました。
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   errors:
     messages:
       already_confirmed: は既に登録済みです。ログインしてください。
