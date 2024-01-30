@@ -1,0 +1,2 @@
+class RawZipcode < ApplicationRecord
+end
