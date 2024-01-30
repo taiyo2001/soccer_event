@@ -1,24 +1,63 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### プロジェクト概要
+---
+みんサカ - みんなでサッカー！
 
-Things you may want to cover:
+サッカー掲示板で仲良くなって一緒にサッカーしよう
 
-* Ruby version
+### 技術選定.etc
+---
 
-* System dependencies
 
-* Configuration
+### LocalのDev環境構築
+---
+`.tool-versions` or `.ruby-version` を確認して、rubyをセットアップ後
 
-* Database creation
+Build
+```
+bundle && rails db:migrate:reset && rails db:seed
+```
 
-* Database initialization
+Server Up
+(立ち上げと同時にtailwindcssの変更もwatchさせるなら`$ bin/dev`だがコンソールに打つデバッグ(byebug.etc)がしづらい)
+```
+rails s
+```
 
-* How to run the test suite
+### ログイン情報
+---
+|  | email | password |
+| :--- | :---: | ---: |
+| test user | soccersample@example.com | password |
+| other user(n<sup>※</sup>) | sample#{n}@example.com | password |
 
-* Services (job queues, cache servers, search engines, etc.)
+※nは1~50
 
-* Deployment instructions
+### デプロイ
+---
 
-* ...
+flyioにデプロイしている
+
+Deploy
+```
+fly deploy
+```
+
+Open app
+```
+fly app open
+```
+
+Ssh
+```
+fly ssh console
+```
+
+Connect DB
+```
+flyctl postgres connect -a ${app_name}
+```
+
+その他各種コマンド
+https://fly.io/docs/flyctl/
