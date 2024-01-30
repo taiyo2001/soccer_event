@@ -1,3 +1,21 @@
 <div>
   <h1 class="font-bold text-4xl"><%= @team.name %></h1>
 </div>
+
+<% if @team_comment.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@team_comment.errors.count, "error") %>件のエラーが発生しました</h2>
+
+    <ul>
+    <% @team_comment.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @team_comment, method: :post do |f| %>
+  <%= f.hidden_field :team_id, value: @team.id %>
+  <%= f.text_field :content %>
+  <%= f.submit 'コメントする' %>
+<% end %>
