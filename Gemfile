@@ -15,6 +15,8 @@ gem 'turbo-rails'
 gem 'jbuilder'
 gem 'tailwindcss-rails'
 
+gem 'enumerize'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
