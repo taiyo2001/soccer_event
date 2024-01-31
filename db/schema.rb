@@ -23,6 +23,35 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_013412) do
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
+  create_table "event_attendances", force: :cascade do |t|
+    t.bigint "event_id", comment: "参加申込イベント"
+    t.bigint "user_id", comment: "イベント申込者"
+    t.string "status", null: false, comment: "ステータス"
+    t.text "note", comment: "備考"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "user_id"], name: "index_unique_event_user_for_event_attendances", unique: true
+    t.index ["event_id"], name: "index_event_attendances_on_event_id"
+    t.index ["user_id"], name: "index_event_attendances_on_user_id"
+  end
+
+  create_table "events", comment: "イベント", force: :cascade do |t|
+    t.bigint "master_id", comment: "イベント主催者"
+    t.string "zipcode_id", comment: "イベント場所の郵便番号"
+    t.string "name", null: false, comment: "イベント名"
+    t.string "address", null: false, comment: "住所"
+    t.string "place", null: false, comment: "場所"
+    t.text "description", null: false, comment: "詳細"
+    t.integer "price", comment: "参加費用"
+    t.integer "people_limit", comment: "人数制限"
+    t.datetime "held_at", null: false, comment: "開催日時"
+    t.datetime "deadline_at", null: false, comment: "申込締切日時"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["master_id"], name: "index_events_on_master_id"
+    t.index ["zipcode_id"], name: "index_events_on_zipcode_id"
+  end
+
   create_table "leagues", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -101,6 +130,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_013412) do
   end
 
   add_foreign_key "cities", "prefectures"
+  add_foreign_key "event_attendances", "events"
+  add_foreign_key "event_attendances", "users"
+  add_foreign_key "events", "users", column: "master_id"
+  add_foreign_key "events", "zipcodes"
   add_foreign_key "team_comments", "teams"
   add_foreign_key "team_comments", "users"
   add_foreign_key "teams", "leagues"

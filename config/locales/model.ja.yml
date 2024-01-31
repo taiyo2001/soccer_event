@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      event: イベント
+      user: ユーザー
+    attributes:
+      event:
+        master: イベント主催者
+        name: イベント名
+        zipcode: イベント場所の郵便番号
+        zipcode_address: 番地までの住所
+        other_address: 番地以下の住所
+        address: 住所
+        place: 場所
+        description: 詳細
+        price: 参加費用
+        people_limit: 人数制限
+        held_at: 開催日時
+        deadline_at: 申込締切日時
