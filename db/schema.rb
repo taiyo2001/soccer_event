@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_31_013412) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_31_071013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_013412) do
     t.index ["event_id", "user_id"], name: "index_unique_event_user_for_event_attendances", unique: true
     t.index ["event_id"], name: "index_event_attendances_on_event_id"
     t.index ["user_id"], name: "index_event_attendances_on_user_id"
+  end
+
+  create_table "event_comments", comment: "イベント参加者コメント", force: :cascade do |t|
+    t.bigint "event_id", comment: "コメントが展開さされてるイベント"
+    t.bigint "user_id", comment: "コメントしたユーザ"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_comments_on_event_id"
+    t.index ["user_id"], name: "index_event_comments_on_user_id"
   end
 
   create_table "events", comment: "イベント", force: :cascade do |t|
@@ -132,6 +142,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_31_013412) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "users"
+  add_foreign_key "event_comments", "events"
+  add_foreign_key "event_comments", "users"
   add_foreign_key "events", "users", column: "master_id"
   add_foreign_key "events", "zipcodes"
   add_foreign_key "team_comments", "teams"
