@@ -1,0 +1,27 @@
+
+      <tr>
+        <td class="py-4 px-6 border-b border-gray-300">
+          <span class="block font-semibold text-xs"><%= attendance.user.name %></span>
+        </td>
+        <td class="py-4 px-6 border-b border-gray-300">
+          <span class="block text-xs mb-2 text-gray-500"><%= l attendance.created_at, format: :long_ja %></span>
+        </td>
+        <td class="py-4 px-6 border-b border-gray-300">
+          <span class="text-red-500"><%= attendance.status_text %></span>
+        </td>
+        <td class="py-4 px-6 border-b border-gray-300">
+          <span class="mb-2"><%= attendance.note %></span>
+        </td>
+        <td class="py-4 px-6 border-b border-gray-300">
+      <%= button_to '承認',
+                    event_event_attendance_path(event_id: @event.id, id: attendance.id),
+                    name: 'approve', method: :patch, params: { status: 'approve' },
+                    class: 'font-bold text-white bg-green-500 p-2 rounded-lg',
+                    data: { turbo_confirm: '承認しますか？' } %>
+
+      <%= button_to '拒否', event_event_attendance_path(event_id: @event.id, id: attendance.id),
+                    name: 'reject', method: :patch, params: { status: 'reject' },
+                    class: 'font-bold text-white bg-red-500 p-2 rounded-lg',
+                    data: { turbo_confirm: '拒否しますか？' } %>
+        </td>
+      </tr>

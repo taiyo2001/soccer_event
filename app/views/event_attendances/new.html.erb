@@ -1,0 +1,15 @@
+<div class="p-2">
+  <h2 class="font-bold text-3xl">イベント申請作成</h2>
+  <div>
+    <h3>イベント内容</h3>
+    <p>hogehogehgoegheo</p>
+
+  </div>
+
+  <%= form_with(model: @attendance, url: event_event_attendances_path, method: :post, data: { turbo: false }) do |form| %>
+    <%= render partial: 'form', locals: { form: } %>
+    <div class="">
+      <%= form.submit '作成', class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg cursor-pointer' %>
+    </div>
+  <% end %>
+</div>
