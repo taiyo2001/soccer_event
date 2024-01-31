@@ -36,7 +36,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @attendance = @event.event_attendances.find_by(user: current_user)
-    # @comment = EventComment.new
+    @is_approve = @event.approved_user?(current_user)
+    @comments = @event.event_comments.order(created_at: :desc).limit(5)
   end
 
   def edit
