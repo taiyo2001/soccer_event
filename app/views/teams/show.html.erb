@@ -5,7 +5,7 @@
 <div>
   <h2>このチームへのコメント一覧</h2>
   <% @team.team_comments.includes(:user).order(created_at: :desc).each do |comment| %>
-    <%= render "share/comment", comment: %>
+    <%= render 'share/comment', comment: %>
   <% end %>
 </div>
 
