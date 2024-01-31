@@ -1,0 +1,21 @@
+    <% if @attendance.errors.any? %>
+      <div>
+        <ul>
+          <% @attendance.errors.full_messages.each do |message| %>
+            <li class="text-red-500"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+
+      <div class="mb-2">
+        <div>
+          <%= form.label :note, '備考' %>
+        </div>
+      <%= form.text_area :note,
+                         placeholder: '入力してください',
+                         class: 'rounded py-1 mb-2 w-full h-full' %>
+      </div>
+    </div>

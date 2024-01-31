@@ -35,6 +35,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @attendance = @event.event_attendances.find_by(user: current_user)
     # @comment = EventComment.new
   end
 
@@ -76,7 +77,7 @@ class EventsController < ApplicationController
       redirect_to root_path, notice: 'Event was successfully deleted.'
     else
       flash[:alert] = 'Failed to delete the event.'
-      redirect_to user_path
+      render :show
     end
   end
 

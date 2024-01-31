@@ -1,0 +1,28 @@
+<div class="p-2">
+  <h2 class="font-bold text-3xl">イベント申請一覧</h2>
+  <div>
+    <span>応募数: <%= @attendance_count %></span>
+    <span>承認数: <%= @approve_count %></span>
+    <span>申請中数: <%= @request_count %></span>
+    <span>拒否数: <%= @reject_count %></span>
+    <span>キャンセル数: </span>
+  </div>
+  <div>
+    <table class="min-w-full bg-white border border-gray-300">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 border-b border-gray-300">ユーザー名</th>
+          <th class="py-2 px-4 border-b border-gray-300">申込日時</th>
+          <th class="py-2 px-4 border-b border-gray-300">申込状況</th>
+          <th class="py-2 px-4 border-b border-gray-300">備考</th>
+          <th class="py-2 px-4 border-b border-gray-300">アクション</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @attendances&.each do |attendance| %>
+      <%= render 'atoms/attendance_content', attendance: %>
+    <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
