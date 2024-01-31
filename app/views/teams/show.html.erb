@@ -2,6 +2,13 @@
   <h1 class="font-bold text-4xl"><%= @team.name %></h1>
 </div>
 
+<div>
+  <h2>このチームへのコメント一覧</h2>
+  <% @team.team_comments.includes(:user).order(created_at: :desc).each do |comment| %>
+    <%= render "share/comment", comment: %>
+  <% end %>
+</div>
+
 <% if @team_comment.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@team_comment.errors.count, 'error') %>件のエラーが発生しました</h2>

@@ -14,7 +14,7 @@ MasterDataGenerator::RegionDataGenerator.instance.generate_init_city_data
 MasterDataGenerator::RegionDataGenerator.instance.generate_init_zipcode_data
 MasterDataGenerator::RegionDataGenerator.instance.generate_init_town_data
 
-%w[user league team].each do |item|
+%w[user league team team_comment].each do |item|
   puts("======== begin create #{item} sample data ========")
   require_relative "seeds/#{item}"
   puts("======== finish create #{item} sample data ========")
