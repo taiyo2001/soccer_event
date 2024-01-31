@@ -19,6 +19,9 @@ ja:
               too_short: "パスワードは6字以上で入力してください"
             password_confirmation:
               confirmation: "パスワードが間違っています"
+            current_password:
+              blank: "確認用パスワードを入力してください"
+              invalid: "確認用パスワードが正しくありません"
   errors:
     messages:
       not_found: "は見つかりませんでした"
