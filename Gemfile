@@ -14,6 +14,7 @@ gem 'turbo-rails'
 
 gem 'jbuilder'
 gem 'kaminari'
+gem 'i18n_generators'
 gem 'tailwindcss-rails'
 
 # Use Redis adapter to run Action Cable in production

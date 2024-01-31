@@ -1,27 +1,4 @@
 ja:
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            name:
-              blank: "名前を入力してください"
-              too_long: "名前は250文字以内で入力してください"
-            age:
-              blank: "年齢を入力してください"
-              not_a_number: "年齢は数値で入力してください"
-            gender:
-              blank: "性別を入力してください"
-            email:
-              blank: "Eメールを入力してください"
-            password:
-              blank: "パスワードを入力してください"
-              too_short: "パスワードは6字以上で入力してください"
-            password_confirmation:
-              confirmation: "パスワードが間違っています"
-            current_password:
-              blank: "確認用パスワードを入力してください"
-              invalid: "確認用パスワードが正しくありません"
   errors:
     messages:
       not_found: "は見つかりませんでした"

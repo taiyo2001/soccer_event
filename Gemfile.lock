@@ -143,6 +143,9 @@ GEM
     htmlbeautifier (1.4.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    i18n_generators (2.2.2)
+      activerecord (>= 3.0.0)
+      railties (>= 3.0.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -386,6 +389,7 @@ DEPENDENCIES
   forgery_ja
   gimei
   htmlbeautifier
+  i18n_generators
   importmap-rails
   jbuilder
   kaminari

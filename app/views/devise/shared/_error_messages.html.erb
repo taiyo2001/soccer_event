@@ -6,8 +6,8 @@
                  resource: resource.class.model_name.human.downcase) %>
     </h2>
     <ul>
-      <% resource.errors.each do |error| %>
-        <li><%= I18n.t(".activerecord.errors.models.user.attributes.#{error.attribute}.#{error.type}") %></li>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>
