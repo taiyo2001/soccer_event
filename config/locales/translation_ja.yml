@@ -1,0 +1,78 @@
+ja:
+  activerecord:
+    models:
+      city: 市  #g
+      league: 同盟  #g
+      prefecture: 県  #g
+      raw_zipcode: 生の郵便番号  #g
+      team: チーム  #g
+      team_comment: チームコメント  #g
+      town: 町  #g
+      user: ユーザー  #g
+      zipcode: 郵便番号  #g
+
+    attributes:
+      city:
+        kana: 仮名  #g
+        name: 名前  #g
+        prefecture: :activerecord.models.prefecture  #g
+        towns: 町  #g
+        zipcodes: 郵便番号  #g
+
+      league:
+        name: 名前  #g
+        teams: チーム  #g
+
+      prefecture:
+        cities: 都市  #g
+        kana: 仮名  #g
+        name: 名前  #g
+        towns: 町  #g
+
+      raw_zipcode:
+        city: 市  #g
+        city_kana: 市かな  #g
+        code: コード  #g
+        prefecture: 県  #g
+        prefecture_kana: 都道府県カナ  #g
+        town: 町  #g
+        town_kana: 町かな  #g
+
+      team:
+        description: 説明  #g
+        league: :activerecord.models.league  #g
+        name: 名前  #g
+        team_comments: チームコメント  #g
+        users: ユーザー  #g
+
+      team_comment:
+        content: コンテンツ  #g
+        team: :activerecord.models.team  #g
+        user: :activerecord.models.user  #g
+
+      town:
+        city: :activerecord.models.city  #g
+        kana: 仮名  #g
+        name: 名前  #g
+        zipcode: :activerecord.models.zipcode  #g
+
+      user:
+        age: 年齢  #g
+        email: Eメール  #g
+        password: パスワード
+        encrypted_password: 暗号化パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: ログインを記憶する
+        current_password: 現在のパスワード
+        favorite_team: お気に入りのチーム  #g
+        gender: 性別  #g
+        name: 名前  #g
+        remember_created_at: ログイン記憶時刻  #g
+        reset_password_sent_at: パスワードリセット送信時刻  #g
+        reset_password_token: パスワードリセット用トークン  #g
+        team_comments: チームコメント  #g
+
+      zipcode:
+        city: :activerecord.models.city  #g
+        prefecture: :activerecord.models.prefecture  #g
+        town: :activerecord.models.town  #g

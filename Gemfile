@@ -12,6 +12,7 @@ gem 'importmap-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
+gem 'i18n_generators'
 gem 'jbuilder'
 gem 'kaminari'
 gem 'tailwindcss-rails'
