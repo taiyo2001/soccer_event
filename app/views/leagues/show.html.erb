@@ -1,0 +1,10 @@
+<div>
+  <h1 class="font-bold text-4xl"><%= @league.name %></h1>
+  <% @teams.each do |team| %>
+    <div>
+      <p><%= link_to team.name, team_path(team) %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @teams %>

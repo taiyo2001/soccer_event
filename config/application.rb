@@ -12,7 +12,8 @@ module SoccerEvent
     config.load_defaults 7.0
 
     config.i18n.default_locale = :ja
-    config.time_zone = 'Tokyo'
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.time_zone = 'Asia/Tokyo'
 
     # Configuration for the application, engines, and railties goes here.
     #
