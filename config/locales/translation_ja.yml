@@ -71,6 +71,7 @@ ja:
         reset_password_sent_at: パスワードリセット送信時刻  #g
         reset_password_token: パスワードリセット用トークン  #g
         team_comments: チームコメント  #g
+        image: 画像
 
       zipcode:
         city: :activerecord.models.city  #g

@@ -35,6 +35,11 @@
         <%= f.select :favorite_team_id, { 'バルセロナ': 1, 'レアル・マドリード': 2 }, { include_blank: '選択してください' }, autofocus: true %>
       </div>
 
+      <div class="mb-2 field">
+        <%= f.label :image %><br>
+        <%= f.file_field :image %>
+      </div>
+
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   USER_COUNTS = 12
 
   def index
-    @users = User.order(:id).page(params[:page]).per(USER_COUNTS)
+    @users = User.with_attached_image.order(:id).page(params[:page]).per(USER_COUNTS)
   end
 
   def show

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+  has_one_attached :image
   has_many :team_comments, dependent: :destroy
+
   belongs_to :favorite_team, class_name: 'Team', optional: true
 
   validates :name, presence: true, length: { maximum: 250 }

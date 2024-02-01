@@ -1,4 +1,10 @@
 <div class="p-5">
+  <% if user.image.attached? %>
+    <div class="flex justify-center">
+      <%= image_tag(user.image.variant(resize_to_limit: [100, 100])) %>
+    </div>
+  <% end %>
+
   <p>
     <strong>名前:</strong>
     <%= user.name %>
