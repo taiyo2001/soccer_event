@@ -20,6 +20,8 @@ gem 'tailwindcss-rails'
 gem 'enumerize'
 gem 'ransack'
 
+gem 'aws-sdk-s3'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
