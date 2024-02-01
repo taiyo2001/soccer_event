@@ -1,10 +1,16 @@
-<div class="show-item">
-  <%= render @user %>
-</div>
+<div class="h-screen w-screen flex justify-center -mt-20">
+  <div class="flex flex-col">
+    <div class="show-item">
+      <%= render @user %>
+    </div>
 
-<nav class="page-nav">
-  <% if @user == current_user %>
-    <%= link_to '修正する', edit_user_registration_path %> |
-  <% end %>
-  <%= link_to '一覧に戻る', users_path %>
-</nav>
+    <div class="flex justify-center">
+      <nav class="page-nav">
+        <% if @user == current_user %>
+          <%= link_to '修正する', edit_user_registration_path, class: 'bg-yellow-400 hover:bg-yellow-300 text-white rounded px-4 py-2' %>
+        <% end %>
+        <%= link_to '戻る', :back, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded px-4 py-2 ml-1' %>
+      </nav>
+    </div>
+  </div>
+</div>

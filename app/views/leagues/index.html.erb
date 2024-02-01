@@ -1,10 +1,23 @@
-<div>
-  <h1 class="font-bold text-4xl">リーグ一覧</h1>
-  <% @leagues.each do |league| %>
-    <div>
-      <p><%= link_to league.name, league_path(league) %></p>
+<div class="h-screen w-screen flex justify-center -mt-20">
+  <div class="flex flex-col">
+    <div class="mb-3">
+      <h1 class="font-bold text-3xl text-center mb-2"><i class="fa-regular fa-futbol"></i> リーグ一覧</h1>
+      <p class="text-center">リーグ名をクリックするとチームの一覧が見れるよ</p>
     </div>
-  <% end %>
-</div>
 
-<%= paginate @leagues %>
+    <div class="flex flex-col">
+      <div class="flex justify-center">
+        <ul>
+          <% @leagues.each do |league| %>
+            <li class="mb-2 list-disc"><%= link_to league.name, league_path(league) %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="flex justify-center">
+        <%= link_to '戻る', :back, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2' %>
+      </div>
+    </div>
+    <%= paginate @leagues %>
+  </div>
+</div>
