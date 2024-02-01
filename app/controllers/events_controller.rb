@@ -1,6 +1,15 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.open
+    # TODO: フリーワードでスペース区切りでできるようにする
+
+    @q = Event.open.ransack(params[:q])
+    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
+    @prefectures = Prefecture.all
+  end
+
+  def search
+    @q = Event.open.ransack(params[:q])
+    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def new
