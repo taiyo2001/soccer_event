@@ -1,0 +1,9 @@
+<div class="p-2 border w-full">
+  <div>
+    <span class="<%= comment.user == current_user ? 'text-blue-500' : '' %>"><%= @event.master == current_user ? '主催者: ' : '参加者' %><%= comment.user.name %></span>
+    <%= l comment.created_at, format: :long_ja %>
+  </div>
+  <div>
+    <%= comment.content %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div>
+  <h2 class="font-bold text-3xl">イベント検索結果</h2>
+  <div class="bg-gray-300 border w-full p-20">
+    <h3>募集中</h3>
+  <% @events.each do |event| %>
+  <div class="mb-4">
+    <%= render 'atoms/event_content', event: %>
+  </div>
+  <% end %>
+  </div>
+</div>

@@ -63,6 +63,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_062703) do
     t.index ["user_id"], name: "index_event_attendances_on_user_id"
   end
 
+  create_table "event_comments", comment: "イベント参加者コメント", force: :cascade do |t|
+    t.bigint "event_id", comment: "コメントが展開さされてるイベント"
+    t.bigint "user_id", comment: "コメントしたユーザ"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_comments_on_event_id"
+    t.index ["user_id"], name: "index_event_comments_on_user_id"
+  end
+
   create_table "events", comment: "イベント", force: :cascade do |t|
     t.bigint "master_id", comment: "イベント主催者"
     t.string "zipcode_id", comment: "イベント場所の郵便番号"
@@ -162,6 +172,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_062703) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "users"
+  add_foreign_key "event_comments", "events"
+  add_foreign_key "event_comments", "users"
   add_foreign_key "events", "users", column: "master_id"
   add_foreign_key "events", "zipcodes"
   add_foreign_key "team_comments", "teams"

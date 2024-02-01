@@ -6,6 +6,7 @@ class Event < ApplicationRecord
 
   has_many :event_attendances
   has_many :applied_users, through: :event_attendances, source: :user
+  has_many :event_comments, dependent: :destroy
   belongs_to :zipcode
   belongs_to :master, class_name: 'User'
 
@@ -26,6 +27,18 @@ class Event < ApplicationRecord
     minutes = (time_difference % (60 * 60)) / 60
 
     "#{days}日 #{hours}時間 #{minutes}分"
+  end
+
+  def approved_user?(user)
+    event_attendances.find_by(user:)&.approve?
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[zipcode name address place price held_at created_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[zipcode prefectures]
   end
 
   private
