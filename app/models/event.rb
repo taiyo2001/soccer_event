@@ -33,6 +33,14 @@ class Event < ApplicationRecord
     event_attendances.find_by(user:)&.approve?
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[zipcode name address place price held_at created_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[zipcode prefectures]
+  end
+
   private
 
   def held_at_and_deadline_at_must_be_valid_dates

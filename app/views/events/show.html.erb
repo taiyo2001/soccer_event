@@ -11,7 +11,7 @@
     <div>場所</div>
     <div><%= @event.place %></div>
   </div>
-    <div>
+  <div>
     <div>住所</div>
     <div>〒<%= @event.zipcode_id %><%= @event.address %></div>
   </div>
@@ -36,26 +36,23 @@
     <div><%= l @event.deadline_at, format: :long_ja %></div>
   </div>
   <% if @event.master == current_user || @is_approve %>
-  <div class="mb-4">
-    <h3>コメント欄</h3>
-    <div class="mb-6">
-      <% @comments&.each do |comment| %>
-        <%= render 'atoms/comment', comment: %>
-      <% end %>
+    <div class="mb-4">
+      <h3>コメント欄</h3>
+      <div class="mb-6">
+        <% @comments&.each do |comment| %>
+          <%= render 'atoms/comment', comment: %>
+        <% end %>
+      </div>
+      <%= link_to '他のコメントも見る', event_event_comments_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg' %>
     </div>
-    <%= link_to '他のコメントも見る', event_event_comments_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg' %>
-  </div>
-
   <% end %>
-
   <% if @event.master == current_user %>
     <div class="flex">
-        <%= link_to '編集', edit_event_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
-        <%= button_to '削除', event_path(@event), method: :delete, class: 'font-bold text-white bg-red-500 border border-red-500 p-2 rounded-lg mx-2',
-                                                data: { turbo_confirm: '本当に削除しますか？' } %>
-        <%= link_to '申込状況を確認する', event_event_attendances_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
+      <%= link_to '編集', edit_event_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
+      <%= button_to '削除', event_path(@event), method: :delete, class: 'font-bold text-white bg-red-500 border border-red-500 p-2 rounded-lg mx-2',
+                                              data: { turbo_confirm: '本当に削除しますか？' } %>
+      <%= link_to '申込状況を確認する', event_event_attendances_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
     </div>
-
   <% else %>
     <% if @attendance.present? %>
       <%= link_to '申込状況を確認する', new_event_event_attendance_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg' %>
