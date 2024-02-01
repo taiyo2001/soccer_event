@@ -1,61 +1,67 @@
-<h2><%= t('.title', resource: resource.model_name.human) %></h2>
+<div class="h-screen w-screen flex justify-center -mt-28">
+  <div class="flex flex-col">
+    <div class="mb-3">
+      <h2 class="text-3xl">
+        <%= t('.title', resource: resource.model_name.human) %>
+      </h2>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render 'devise/shared/error_messages', resource: %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render 'devise/shared/error_messages', resource: %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+      <div class="mb-2 field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, autofocus: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
-  </div>
+      <div class="mb-2 field">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :age %><br>
-    <%= f.text_field :age, autofocus: true %>
-  </div>
+      <div class="mb-2 field">
+        <%= f.label :age %><br>
+        <%= f.text_field :age, autofocus: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%# TODO: 正しいデータをセットする %>
-    <%= f.select :gender, { '男性': 'man', '女性': 'woman', '選択しない': 'no gender' }, { include_blank: '選択してください' }, autofocus: true %>
-  </div>
+      <div class="mb-2 field">
+        <%= f.label :gender %><br>
+        <%= f.select :gender, { '男性': 'man', '女性': 'woman', '選択しない': 'no gender' }, { include_blank: '選択してください' }, autofocus: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :favorite_team %><br>
-    <%# TODO: 正しいデータをセットする %>
-    <%= f.select :favorite_team_id, { 'バルセロナ': 1, 'レアル・マドリード': 2 }, { include_blank: '選択してください' }, autofocus: true %>
-  </div>
+      <div class="mb-2 field">
+        <%= f.label :favorite_team %><br>
+        <%# TODO: 正しいデータをセットする %>
+        <%= f.select :favorite_team_id, { 'バルセロナ': 1, 'レアル・マドリード': 2 }, { include_blank: '選択してください' }, autofocus: true %>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br>
-    <%= f.password_field :password, autocomplete: 'new-password' %>
-    <% if @minimum_password_length %>
-      <br>
-      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+      <div class="mb-2 field">
+        <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br>
+        <%= f.password_field :password, autocomplete: 'new-password' %>
+        <% if @minimum_password_length %>
+          <br>
+          <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+        <% end %>
+      </div>
+
+      <div class="mb-2 field">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
+      </div>
+
+      <div class="mb-2 field">
+        <%= f.label :current_password %> <br><i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br>
+        <%= f.password_field :current_password, autocomplete: 'current-password' %>
+      </div>
+
+      <div class="mb-3 flex justify-left">
+        <%= f.submit t('.update'), class: "bg-blue-700 hover:bg-blue-600 text-white rounded px-4 py-2 mr-2" %>
+        <%= link_to t('.back'), :back, class: "bg-gray-600 hover:bg-gray-500 text-white rounded px-4 py-2 ml-1" %>
+      </div>
     <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br>
-    <%= f.password_field :current_password, autocomplete: 'current-password' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('.update') %>
-  </div>
-<% end %>
-
-<%= link_to t('.back'), :back %>
+</div>
