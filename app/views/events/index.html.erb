@@ -6,7 +6,7 @@
       <%= f.search_field :name_or_address_or_place_cont %>
       <%= f.label :zipcode_prefecture_name_eq, '都道府県', class: 'p-2' %>
       <%= f.collection_select :zipcode_prefecture_name_eq, @prefectures, :name, :name, { include_blank: '選択してください' },
-                            { class: 'p-2' } %>
+                              { class: 'p-2' } %>
       <%= f.label :held_at_cont, '開催日' %>
       <%= f.date_field :held_at_gteq, class: '' %>
       <span>~</span>

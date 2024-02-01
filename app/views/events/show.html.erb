@@ -50,7 +50,7 @@
     <div class="flex">
       <%= link_to '編集', edit_event_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
       <%= button_to '削除', event_path(@event), method: :delete, class: 'font-bold text-white bg-red-500 border border-red-500 p-2 rounded-lg mx-2',
-                                                data: { turbo_confirm: '本当に削除しますか？' } %>
+                                              data: { turbo_confirm: '本当に削除しますか？' } %>
       <%= link_to '申込状況を確認する', event_event_attendances_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg mx-2' %>
     </div>
   <% else %>
