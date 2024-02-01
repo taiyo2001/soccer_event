@@ -1,5 +1,4 @@
-require 'faker'
-require 'gimei'
+User.destroy_all
 
 # 認証にはdeviseを使用
 # test user
