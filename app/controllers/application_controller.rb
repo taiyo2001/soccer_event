@@ -21,5 +21,6 @@ class ApplicationController < ActionController::Base
 
   def set_search_event_form
     @q = Event.open.ransack(params[:q])
+    @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
   end
 end
