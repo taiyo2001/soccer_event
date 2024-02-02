@@ -1,22 +1,52 @@
 <div>
-  <h2 class="font-bold text-3xl">イベント一覧</h2>
-  <div>
+  <div class="bg-blue-100 p-6">
     <%= search_form_for @q, url: events_path do |f| %>
-      <%= f.label :name_cont, 'フリーワード' %>
-      <%= f.search_field :name_or_address_or_place_cont %>
-      <%= f.label :zipcode_prefecture_name_eq, '都道府県', class: 'p-2' %>
-      <%= f.collection_select :zipcode_prefecture_name_eq, @prefectures, :name, :name, { include_blank: '選択してください' },
-                              { class: 'p-2' } %>
-      <%= f.label :held_at_cont, '開催日' %>
-      <%= f.date_field :held_at_gteq, class: '' %>
-      <span>~</span>
-      <%= f.date_field :held_at_lteq_end_of_day, class: '' %>
-      <%= f.label :price_gteq, '参加費用' %>
-      <%= f.number_field :price_gteq %>
-      <span>~</span>
-      <%= f.number_field :price_lteq %>
-      <%= f.sort_link :created_at, '作成日時' %>
-      <%= f.submit '検索' %>
+      <div class="flex">
+        <table>
+          <tr>
+            <th class="w-60 font-normal">
+              <%= f.label :name_or_address_or_place_cont, 'フリーワード' %>
+            </th>
+            <td class="w-96">
+              <%= f.search_field :name_or_address_or_place_cont, placeholder: '[ex. ]', class: 'border w-full rounded-lg' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="font-normal">
+              <%= f.label :zipcode_prefecture_name_eq, '都道府県' %>
+            </th>
+            <td>
+              <%= f.collection_select :zipcode_prefecture_name_eq, @prefectures, :name, :name, { include_blank: '' },
+                                      { class: 'border rounded-lg  w-full' } %>
+            </td>
+          </tr>
+          <tr>
+            <th class="font-normal">
+              <%= f.label :held_at_cont, '開催日' %>
+            </th>
+            <td>
+              <%= f.date_field :held_at_gteq, class: 'border rounded-lg' %>
+              <span class="font-bold mx-2">~</span>
+              <%= f.date_field :held_at_lteq_end_of_day, class: 'border rounded-lg' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="font-normal">
+              <%= f.label :price_gteq, '参加費用' %>
+            </th>
+            <td>
+              <%= f.number_field :price_gteq, class: 'border rounded-lg w-20' %>
+              <span class="font-bold mx-2">~</span>
+              <%= f.number_field :price_lteq, class: 'border rounded-lg w-20' %>
+            </td>
+          </tr>
+        </table>
+        <div>
+        <%= f.sort_link :created_at, '作成日時' %>
+        <%= f.submit '検索', class: 'font-bold text-white bg-blue-500 rounded px-4 py-2' %>
+        <div class="underline cursor-pointer">もっと絞り込む</div>
+        </div>
+      </div>
     <% end %>
   </div>
   <div class="bg-gray-300 border w-full p-20">

@@ -8,10 +8,8 @@
     <%= javascript_importmap_tags %>
     <script src="https://kit.fontawesome.com/4aa12ef06a.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'tailwind', 'inter-font', "data-turbo-track": 'reload' %>
-
     <%= stylesheet_link_tag 'application', "data-turbo-track": 'reload' %>
   </head>
-
   <body>
     <% if notice %>
       <p class="text-green-500"><%= notice %></p>
@@ -19,22 +17,23 @@
     <% if alert %>
       <p class="text-red-500"><%= alert %></p>
     <% end %>
+    <%= render partial: 'layouts/header', locals: { q: @q } %>
+    <div class="border-b">
+    <ul class="flex">
 
-    <header>
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to 'イベント一覧', root_path %></li>
-          <li><%= link_to 'リーグ一覧', leagues_path %></li>
-          <li><%= link_to 'ユーザ一覧', users_path %></li>
-          <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </header>
+      <% if user_signed_in? %>
+        <li><%= link_to 'イベント一覧', root_path %></li>
+        <li><%= link_to 'リーグ一覧', leagues_path %></li>
+        <li><%= link_to 'ユーザ一覧', users_path %></li>
+        <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+        <li><%= link_to 'ログイン', new_user_session_path %></li>
+      <% end %>
+    </ul>
+    </div>
 
-    <main class="mt-28 px-5">
+    <main class="mt-10">
       <%= yield %>
     </main>
   </body>
