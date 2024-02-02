@@ -27,5 +27,18 @@
       </div>
       <span class="block font-semibold text-xs">@<%= event.master.name %></span>
     </div>
+    <div class="favorite-field">
+      <% if favorite = Favorite.find_by(user: current_user, event:) %>
+        <div id="favorite_form<%= event.id %>" class="favorite_link">
+          <%= render partial: 'favorites/favorite', locals: { event:, favorite: } %>
+        </div>
+      <% else %>
+        <div id="favorite_form<%= event.id %>" class="favorite_link">
+          <%= render 'favorites/unfavorite', event: %>
+        </div>
+      <% end %>
+
+      <span id="favorite-count<%= event.id %>"><%= Favorite.where(event:).count %></span>
+    </div>
   </div>
 <% end %>
