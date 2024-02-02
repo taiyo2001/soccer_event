@@ -25,10 +25,9 @@
       </div>
     </div>
     <div class="favorite-field">
-      <% favorite_counts = Favorite.where(event:).count %>
       <% if favorite = Favorite.find_by(user: current_user, event:) %>
         <div id="favorite_form<%= event.id %>" class="favorite_link">
-          <%= render partial: 'favorites/favorite', locals: {event:, favorite:} %>
+          <%= render partial: 'favorites/favorite', locals: { event:, favorite: } %>
         </div>
       <% else %>
         <div id="favorite_form<%= event.id %>" class="favorite_link">
@@ -36,6 +35,7 @@
         </div>
       <% end %>
 
+      <% favorite_counts = Favorite.where(event:).count %>
       <span id="favorite-count<%= event.id %>"><%= favorite_counts %></span>
     </div>
   </div>

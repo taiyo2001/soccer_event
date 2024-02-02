@@ -1,5 +1,5 @@
 <%= turbo_stream.update "favorite_form#{@event.id}" do %>
-  <%= render partial: "favorite", locals: { event: @event, favorite: @favorite } %>
+  <%= render partial: 'favorite', locals: { event: @event, favorite: @favorite } %>
 <% end %>
 <%= turbo_stream.update "favorite-count#{@event.id}" do %>
   <%= Favorite.where(event: @event).count %>
