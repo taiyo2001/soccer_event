@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_01_062703) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_01_082313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_062703) do
     t.datetime "updated_at", null: false
     t.index ["master_id"], name: "index_events_on_master_id"
     t.index ["zipcode_id"], name: "index_events_on_zipcode_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_favorites_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_favorites_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "leagues", force: :cascade do |t|
@@ -176,6 +186,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_01_062703) do
   add_foreign_key "event_comments", "users"
   add_foreign_key "events", "users", column: "master_id"
   add_foreign_key "events", "zipcodes"
+  add_foreign_key "favorites", "events"
+  add_foreign_key "favorites", "users"
   add_foreign_key "team_comments", "teams"
   add_foreign_key "team_comments", "users"
   add_foreign_key "teams", "leagues"
