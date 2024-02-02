@@ -35,8 +35,7 @@
         </div>
       <% end %>
 
-      <% favorite_counts = Favorite.where(event:).count %>
-      <span id="favorite-count<%= event.id %>"><%= favorite_counts %></span>
+      <span id="favorite-count<%= event.id %>"><%= Favorite.where(event:).count %></span>
     </div>
   </div>
 <% end %>
