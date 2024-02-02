@@ -3,7 +3,7 @@ class EventsController < ApplicationController
     # TODO: フリーワードでスペース区切りでできるようにする
 
     @q = Event.open.ransack(params[:q])
-    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page])
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
     @prefectures = Prefecture.all
   end
 
