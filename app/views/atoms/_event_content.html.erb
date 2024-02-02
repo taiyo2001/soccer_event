@@ -17,15 +17,30 @@
       <span class="rounded text-sm inline-block mr-4">参加費用: <%= event.price %></span>
       <span class="rounded text-sm inline-block">制限人数: <%= event.event_attendances.approve.count %> / <%= event.people_limit %></span>
     </div>
-    <div class="flex items-center">
-      <div class='mx-2 rounded-full overflow-hidden w-8 h-8 block'>
-        <% if event.master.image.attached? %>
-          <%= image_tag event.master.image, class: 'w-full h-full object-cover' %>
-        <% else %>
-          <div class='w-full h-full object-cover bg-gray-300'></div>
-        <% end %>
+    <div class="flex">
+      <div class="flex items-center mr-20">
+        <div class='mx-2 rounded-full overflow-hidden w-8 h-8 block'>
+          <% if event.master.image.attached? %>
+            <%= image_tag event.master.image, class: 'w-full h-full object-cover' %>
+          <% else %>
+            <div class='w-full h-full object-cover bg-gray-300'></div>
+          <% end %>
+        </div>
+        <span class="block font-semibold text-xs">@<%= event.master.name %></span>
       </div>
-      <span class="block font-semibold text-xs">@<%= event.master.name %></span>
+      <div class="flex items-center">
+        <% if favorite = Favorite.find_by(user: current_user, event:) %>
+          <div id="favorite_form<%= event.id %>" class="favorite_link mr-2">
+            <%= render partial: 'favorites/favorite', locals: { event:, favorite: } %>
+          </div>
+        <% else %>
+          <div id="favorite_form<%= event.id %>" class="favorite_link mr-2">
+            <%= render 'favorites/unfavorite', event: %>
+          </div>
+        <% end %>
+
+        <span id="favorite-count<%= event.id %>"><%= Favorite.where(event:).count %></span>
+      </div>
     </div>
   </div>
 <% end %>

@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 
   def search
     @q = Event.open.ransack(params[:q])
-    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
+    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page])
   end
 
   def new
