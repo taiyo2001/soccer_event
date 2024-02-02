@@ -19,21 +19,19 @@
     <% end %>
     <%= render partial: 'layouts/header', locals: { q: @q } %>
     <div class="border-b">
-    <ul class="flex">
-
-      <% if user_signed_in? %>
-        <li><%= link_to 'イベント一覧', root_path %></li>
-        <li><%= link_to 'リーグ一覧', leagues_path %></li>
-        <li><%= link_to 'ユーザ一覧', users_path %></li>
-        <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-        <li><%= link_to 'ログイン', new_user_session_path %></li>
-      <% end %>
-    </ul>
+      <ul class="flex">
+        <% if user_signed_in? %>
+          <li><%= link_to 'イベント一覧', root_path %></li>
+          <li><%= link_to 'リーグ一覧', leagues_path %></li>
+          <li><%= link_to 'ユーザ一覧', users_path %></li>
+          <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <% end %>
+      </ul>
     </div>
-
-    <main class="mt-10">
+    <main class="pt-10 bg-blue-50">
       <%= yield %>
     </main>
   </body>
