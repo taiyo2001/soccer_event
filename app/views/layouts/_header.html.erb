@@ -19,27 +19,35 @@
     <% end %>
   </div>
   <div class="flex">
-    <div class="h-full flex items-center pr-8">
-      <%= search_form_for q, url: events_path do |f| %>
-        <div class="relative">
-          <%= f.search_field :name_or_address_or_place_cont, class: 'border h-9 w-80 rounded-lg pl-10 pr-4', placeholder: '募集中のイベントを探す' %>
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <i class="fas fa-search text-gray-500"></i>
-          </div>
-        </div>
-        <%= f.submit '検索', class: 'hidden' %>
-      <% end %>
-    </div>
     <% if user_signed_in? %>
+      <div class="h-full flex items-center pr-8">
+        <div class="mr-3"><%= link_to 'イベント', root_path %>   /</div>
+        <div class="mr-3"><%= link_to 'リーグ', leagues_path %>   /</div>
+        <div class="mr-5"><%= link_to 'ユーザー', users_path %></div>
+
+        <%= search_form_for q, url: events_path do |f| %>
+          <div class="relative">
+            <%= f.search_field :name_or_address_or_place_cont, class: 'border h-9 w-80 rounded-lg pl-10 pr-4', placeholder: '募集中のイベントを探す' %>
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-search text-gray-500"></i>
+            </div>
+          </div>
+          <%= f.submit '検索', class: 'hidden' %>
+        <% end %>
+      </div>
+
       <div class="h-full flex items-center">
         <div class="font-bold"><%= current_user.name %></div>
         <%= link_to user_path(current_user), class: 'mx-2 rounded-full overflow-hidden w-12 h-12 block' do %>
           <%= image_tag current_user.image, class: 'w-full h-full object-cover' if current_user.image.attached? %>
         <% end %>
+        <div class="mr-3"><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></div>
       </div>
     <% else %>
-      <div><%= link_to 'サインアップ', new_user_registration_path %></div>
-      <div><%= link_to 'ログイン', new_user_session_path %></div>
+      <div class="flex items-center">
+        <div class="mr-3"><%= link_to 'サインアップ', new_user_registration_path %></div>
+        <div class="mr-3"><%= link_to 'ログイン', new_user_session_path %></div>
+      </div>
     <% end %>
   </div>
 </header>
