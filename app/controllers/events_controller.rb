@@ -1,9 +1,7 @@
 class EventsController < ApplicationController
   def index
     # TODO: フリーワードでスペース区切りでできるようにする
-
-    @q = Event.open.ransack(params[:q])
-    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
     @prefectures = Prefecture.all
   end
 
@@ -25,10 +23,7 @@ class EventsController < ApplicationController
       zipcode = Zipcode.find_by(id: event_create_params[:zipcode_id])
       @event.errors.add(:zipcode_id, '郵便番号を再検索してください') if zipcode.nil?
 
-      town = zipcode&.town
-      city = town&.city
-      prefecture = city&.prefecture
-      @event.zipcode_address = "#{prefecture&.name}#{city&.name}#{town&.name}"
+      @event.zipcode_address = "#{zipcode.prefecture&.name}#{zipcode.city&.name}#{zipcode.town&.name}"
       @event.zipcode = zipcode
       return render :new
     end
@@ -51,7 +46,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    @event.zipcode_address = "#{@event.zipcode.town.city.prefecture.name}#{@event.zipcode.town.city.name}#{@event.zipcode.town.name}"
+    zipcode = @event.zipcode
+    @event.zipcode_address = "#{zipcode.prefecture.name}#{zipcode.town.city.name}#{zipcode.town.name}"
     @event.other_address = @event.address.sub(@event.zipcode_address, '')
     @editable = false
   end
@@ -63,10 +59,7 @@ class EventsController < ApplicationController
       zipcode = Zipcode.find_by(id: event_create_params[:zipcode_id])
       @event.errors.add(:zipcode_id, '郵便番号を再検索してください') if zipcode.nil?
 
-      town = zipcode&.town
-      city = town&.city
-      prefecture = city&.prefecture
-      @event.zipcode_address = "#{prefecture&.name}#{city&.name}#{town&.name}"
+      @event.zipcode_address = "#{zipcode.prefecture&.name}#{zipcode.city&.name}#{zipcode.town&.name}"
       @event.zipcode = zipcode
       return render :edit
     end

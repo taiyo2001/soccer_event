@@ -1,8 +1,14 @@
-<div>
-  <p><%= comment.content %></p>
+<div class="m-3">
+  <div class="border border-gray-300">
+    <div class="p-3">
+      <p><%= comment.content %></p>
+    </div>
 
-  <span>
-    <%= comment.user.name %> |
-    <%= l comment.created_at, format: :short %>
-  </span>
+    <div class="flex justify-end">
+      <span class="p-3">
+        <%= comment.user.name %> |
+        <%= l comment.created_at, format: :short %>
+      </span>
+    </div>
+  </div>
 </div>

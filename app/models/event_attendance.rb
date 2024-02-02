@@ -4,5 +4,5 @@ class EventAttendance < ApplicationRecord
   belongs_to :event
   belongs_to :user
 
-  enumerize :status, in: %i[request approve reject], default: 'request'
+  enumerize :status, in: %i[request approve reject], default: 'request', scope: :shallow, predicates: true
 end
