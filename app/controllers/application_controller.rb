@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_search_event_form
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :fetch_notifications
 
   protected
 
@@ -22,5 +23,11 @@ class ApplicationController < ActionController::Base
   def set_search_event_form
     @q = Event.open.ransack(params[:q])
     @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
+  end
+
+  private
+
+  def fetch_notifications
+    @notifications = Notification.where(user: current_user).order(created_at: :desc).limit(4)
   end
 end
