@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :event_attendances, dependent: :destroy
   has_many :event_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   belongs_to :favorite_team, class_name: 'Team', optional: true
 

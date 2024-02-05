@@ -36,6 +36,8 @@
         <% end %>
       </div>
 
+      <%= render 'layouts/notification', notifications: @notifications %>
+
       <div class="h-full flex items-center">
         <div class="font-bold"><%= current_user.name %></div>
         <%= link_to user_path(current_user), class: 'mx-2 rounded-full overflow-hidden w-12 h-12 block' do %>
