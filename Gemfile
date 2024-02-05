@@ -66,11 +66,11 @@ group :development, :test do
   gem 'rspec_junit_formatter'
 
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'letter_opener_web'
   gem 'rails-erd'
 end
 
 group :development do
+  gem 'letter_opener_web'
   gem 'web-console'
 
   gem 'activerecord-import'

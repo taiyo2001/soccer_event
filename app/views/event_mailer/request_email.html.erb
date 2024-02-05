@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  </head>
+  <body>
+    <h1><%= @request_user.name %>から<%= @event.name %>への参加申請が届きました</h1>
+    <p><a href="http://localhost:3000/events/<%= @event.id %>/event_attendances">サイト</a>で参加申請を確認しましょう。</p>
+  </body>
+</html>

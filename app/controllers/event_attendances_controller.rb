@@ -19,7 +19,7 @@ class EventAttendancesController < ApplicationController
     @attendance = EventAttendance.new(attendance_create_params.merge(event:, status: 'request'))
 
     if @attendance.save
-      # TODO: メールか通知機能
+      EventMailer.with(master: event.master, request_user: current_user, event:).request_email.deliver_now
       redirect_to event
     else
       render :new
@@ -30,7 +30,7 @@ class EventAttendancesController < ApplicationController
     event = Event.find(params[:event_id])
     attendance = event.event_attendances.find(params[:id])
     if attendance.update(status: params[:status])
-      # TODO: メールか通知機能
+      EventMailer.with(event: attendance.event, request_user: attendance.user, status: attendance.status_text).attendance_email.deliver_now
       redirect_to event_event_attendances_path(event)
     else
       render :new
