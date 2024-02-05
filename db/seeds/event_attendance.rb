@@ -1,3 +1,5 @@
+EventAttendance.destroy_all
+
 STATUS = %w[request approve reject].freeze
 
 user_ids = User.all.pluck(:id)
