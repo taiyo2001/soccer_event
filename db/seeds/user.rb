@@ -12,7 +12,7 @@ User.create!(
 
 50.times do |i|
   User.create!(
-    name: Faker::Name.initials,
+    name: Faker::Games::Pokemon.name,
     email: "sample#{i + 1}@example.com",
     password: 'password',
     age: rand(20..60),
