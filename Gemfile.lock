@@ -440,6 +440,7 @@ DEPENDENCIES
   ransack
   rspec_junit_formatter
   rubocop
+  rubyzip
   selenium-webdriver
   sprockets-rails
   stimulus-rails
