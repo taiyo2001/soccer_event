@@ -7,7 +7,10 @@ PLACE = %w[スタジアム フィールド 公園 空き地].freeze
 
 user_ids = User.all.pluck(:id)
 test_user_id = User.find_by(email: 'soccersample@example.com').id
-zipcodes = Zipcode.includes(%i[town city prefecture]).all
+
+# productionではデータ件数が多くすべてを処理できないので100件と取得
+zipcodes = Zipcode.includes(%i[town city prefecture]).order('RANDOM()').limit(100)
+
 now = Time.now
 
 events = []
