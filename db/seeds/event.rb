@@ -1,6 +1,8 @@
 require 'faker'
 require 'gimei'
 
+Event.destroy_all
+
 PLACE = %w[スタジアム フィールド 公園 空き地].freeze
 
 user_ids = User.all.pluck(:id)
@@ -10,14 +12,7 @@ now = Time.now
 
 events = []
 10.times do |i|
-  deadline_at = Time.new(
-    now.year,
-    now.month,
-    now.day + rand(1..30),
-    rand(0..23),
-    rand(0..59),
-    rand(0..59)
-  )
+  deadline_at = now.advance(days: rand(1..30), hours: rand(0..23), minutes: rand(0..59), seconds: rand(0..59))
   zipcode = zipcodes.sample
 
   events << Event.new(
@@ -35,14 +30,7 @@ events = []
 end
 
 50.times do |i|
-  deadline_at = Time.new(
-    now.year,
-    now.month,
-    now.day + rand(1..30),
-    rand(0..23),
-    rand(0..59),
-    rand(0..59)
-  )
+  deadline_at = now.advance(days: rand(1..30), hours: rand(0..23), minutes: rand(0..59), seconds: rand(0..59))
   zipcode = zipcodes.sample
 
   events << Event.new(

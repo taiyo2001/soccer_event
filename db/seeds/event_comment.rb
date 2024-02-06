@@ -1,6 +1,8 @@
 require 'faker'
 require 'gimei'
 
+EventComment.destroy_all
+
 events = Event.includes(event_attendances: :user).all
 
 comments = []

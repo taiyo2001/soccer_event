@@ -1,4 +1,6 @@
 class EventAttendancesController < ApplicationController
+  SOCCER_EVENT_URL = 'http://localhost:3000'.freeze
+
   def index
     @event = Event.find(params[:event_id])
     return redirect_to root_path, alert: 'access denied.' if @event.master != current_user
@@ -19,7 +21,9 @@ class EventAttendancesController < ApplicationController
     @attendance = EventAttendance.new(attendance_create_params.merge(event:, status: 'request'))
 
     if @attendance.save
-      # TODO: メールか通知機能
+      EventMailer.with(master: event.master, request_user: current_user, event:).request_email.deliver_now
+      Notification.create!(user_id: event.master_id, message: "#{event.name}に#{current_user.name}さんから申請がありました",
+                           url: SOCCER_EVENT_URL + Rails.application.routes.url_helpers.event_event_attendances_path(event))
       redirect_to event
     else
       render :new
@@ -30,7 +34,9 @@ class EventAttendancesController < ApplicationController
     event = Event.find(params[:event_id])
     attendance = event.event_attendances.find(params[:id])
     if attendance.update(status: params[:status])
-      # TODO: メールか通知機能
+      EventMailer.with(event: attendance.event, request_user: attendance.user, status: attendance.status_text).attendance_email.deliver_now
+      Notification.create!(user: attendance.user, message: "#{event.name}の申請が#{attendance.status_text}されました",
+                           url: SOCCER_EVENT_URL + Rails.application.routes.url_helpers.event_path(event))
       redirect_to event_event_attendances_path(event)
     else
       render :new

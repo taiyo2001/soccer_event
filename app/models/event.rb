@@ -4,9 +4,10 @@ class Event < ApplicationRecord
   scope :open, -> { where('deadline_at > ?', Time.current) }
   scope :closed, -> { where('deadline_at < ?', Time.current) }
 
-  has_many :event_attendances
+  has_many :event_attendances, dependent: :destroy
   has_many :applied_users, through: :event_attendances, source: :user
   has_many :event_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   belongs_to :zipcode
   belongs_to :master, class_name: 'User'
 
