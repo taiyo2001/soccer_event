@@ -2,10 +2,10 @@ EventAttendance.destroy_all
 
 STATUS = %w[request approve reject].freeze
 
-user_ids = User.all.pluck(:id)
 test_user_id = User.find_by(email: 'soccersample@example.com').id
+no_test_user_ids = User.where.not(id: test_user_id).pluck(:id)
 event_ids = Event.all.pluck(:id)
-no_test_user_combinations = event_ids.product(user_ids).shuffle
+no_test_user_combinations = event_ids.product(no_test_user_ids).shuffle
 test_user_combinations = event_ids.product([test_user_id]).shuffle
 
 attendances = []

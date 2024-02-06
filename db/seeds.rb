@@ -12,11 +12,11 @@ puts('======== finish create destroy_all sample data ========')
 
 puts 'Please wait a moment for the insertion of the address'
 
-MasterDataGenerator::RawZipcodeDataGenerator.generate_init_rawdata
-MasterDataGenerator::RegionDataGenerator.instance.generate_init_pref_data
-MasterDataGenerator::RegionDataGenerator.instance.generate_init_city_data
-MasterDataGenerator::RegionDataGenerator.instance.generate_init_zipcode_data
-MasterDataGenerator::RegionDataGenerator.instance.generate_init_town_data
+MasterDataGenerator::RawZipcodeDataGenerator.generate_init_rawdata if RawZipcode.count.zero?
+MasterDataGenerator::RegionDataGenerator.instance.generate_init_pref_data if Prefecture.count.zero?
+MasterDataGenerator::RegionDataGenerator.instance.generate_init_city_data if City.count.zero?
+MasterDataGenerator::RegionDataGenerator.instance.generate_init_zipcode_data if Zipcode.count.zero?
+MasterDataGenerator::RegionDataGenerator.instance.generate_init_town_data if Town.count.zero?
 
 %w[user league team team_comment event event_attendance event_comment favorite].each do |item|
   puts("======== begin create #{item} sample data ========")
