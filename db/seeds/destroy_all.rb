@@ -1,0 +1,12 @@
+RawZipcode.destroy_all
+Zipcode.destroy_all
+Prefecture.destroy_all
+City.destroy_all
+Town.destroy_all
+User.destroy_all
+League.destroy_all
+TeamComment.destroy_all
+Event.destroy_all
+EventAttendance.destroy_all
+EventComment.destroy_all
+Favorite.destroy_all

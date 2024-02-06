@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+puts('======== begin create destroy_all sample data ========')
+require_relative 'seeds/destroy_all'
+puts('======== finish create destroy_all sample data ========')
+
 puts 'Please wait a moment for the insertion of the address'
 
 MasterDataGenerator::RawZipcodeDataGenerator.generate_init_rawdata
