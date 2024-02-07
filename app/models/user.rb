@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   belongs_to :favorite_team, class_name: 'Team', optional: true
 
-  validates :name, presence: true, length: { maximum: 250 }
+  validates :name, presence: true, length: { maximum: 250 }, uniqueness: true
   validates :age, presence: true, numericality: { only_integer: true }
   validates :gender, presence: true
 
