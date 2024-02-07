@@ -1,5 +1,3 @@
-Favorite.destroy_all
-
 users = User.all
 events = Event.all
 

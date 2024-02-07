@@ -1,5 +1,3 @@
-EventAttendance.destroy_all
-
 STATUS = %w[requested canceled approved rejected].freeze
 
 test_user_id = User.find_by(email: 'soccersample@example.com').id
