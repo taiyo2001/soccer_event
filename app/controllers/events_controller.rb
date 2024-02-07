@@ -19,7 +19,7 @@ class EventsController < ApplicationController
   end
 
   def attendance
-    @q = current_user.events.approved.ransack(params[:q])
+    @q = current_user.events.approved.open.ransack(params[:q])
     @q.sorts = 'held_at asc' if params[:q].blank? || params[:q][:s].blank?
     @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
     @prefectures = Prefecture.all

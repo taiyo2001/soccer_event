@@ -7,8 +7,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @attendance_events = @user.events.approved.limit(3).order(held_at: :asc)
-    @my_events = @user.events.limit(3).order(held_at: :desc)
-    @favorite_events = @user.favorite_events.limit(3).order(held_at: :asc)
+
+    if @user == current_user
+      all_attendance_events = current_user.events.approved.open
+      @attendance_events = all_attendance_events.limit(3).order(held_at: :asc)
+      @attendance_events_count = all_attendance_events.count
+    end
+
+    all_my_events = @user.events
+    @my_events = all_my_events.limit(3).order(held_at: :desc)
+    @my_events_count = all_my_events.count
+
+    all_favorite_events = @user.favorite_events
+    @favorite_events = all_favorite_events.limit(3).order(held_at: :asc)
+    @favorite_events_count = all_favorite_events.count
   end
 end

@@ -50,7 +50,10 @@
   <% if @user == current_user %>
     <div class="bg-blue-50 w-full py-10">
       <div class="flex justify-between items-center mb-8">
-        <h3 class="font-semibold">近日に参加するイベント</h3>
+        <div>
+          <h3 class="font-semibold mb-2">近日に参加するイベント</h3>
+          <span>全<%= @attendance_events_count %>件</span>
+        </div>
         <%= link_to 'もっと見る', attendance_events_path,
                     class: 'relative inline-flex items-center px-3
                           py-2 text-gray-900 underline
@@ -65,7 +68,10 @@
   <% end %>
   <div class="bg-blue-50 w-full pb-10">
     <div class="flex justify-between items-center mb-8">
-      <h3 class="font-semibold">立ち上げたイベント</h3>
+      <div>
+        <h3 class="font-semibold mb-2">立ち上げたイベント</h3>
+        <span>全<%= @my_events_count %>件</span>
+      </div>
       <%= link_to 'もっと見る', mine_events_path,
                   class: 'relative inline-flex items-center px-3
                           py-2 text-gray-900 underline
@@ -79,7 +85,10 @@
   </div>
   <div class="bg-blue-50 w-full  pb-10">
     <div class="flex justify-between items-center mb-8">
-      <h3 class="font-semibold">お気に入りのイベント</h3>
+      <div>
+        <h3 class="font-semibold mb-2">お気に入りのイベント</h3>
+        <span>全<%= @favorite_events_count %>件</span>
+      </div>
       <%= link_to 'もっと見る', favorite_events_path,
                   class: 'relative inline-flex items-center px-3
                           py-2 text-gray-900 underline
