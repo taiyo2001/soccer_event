@@ -30,6 +30,10 @@ class Event < ApplicationRecord
     "#{days}日 #{hours}時間 #{minutes}分"
   end
 
+  def can_request?
+    people_limit > event_attendances.approved.count
+  end
+
   def applied?(user)
     event_attendances.where(user:).present?
   end

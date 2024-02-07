@@ -19,6 +19,8 @@ class EventAttendancesController < ApplicationController
 
   def create
     event = Event.find(params[:event_id])
+    return redirect_to event, alert: '定員に達しているため参加申し込みはできません' unless event.can_request?
+
     @attendance = EventAttendance.new(attendance_create_params.merge(event:, status: 'requested'))
 
     if @attendance.save

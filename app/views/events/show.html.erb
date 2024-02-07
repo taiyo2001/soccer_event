@@ -5,7 +5,7 @@
     <span class="rounded text-sm inline-block mr-4">参加人数: <%= @event.event_attendances.approved.count %> / <%= @event.people_limit %></span>
   </div>
   <h2 class="font-bold text-3xl mb-6 pl-6"><%= @event.name %></h2>
-  <%= link_to @event.master, class: 'flex items-center inline-block' do %>
+  <%= link_to @event.master, class: 'flex items-center' do %>
     <div class='mx-2 rounded-full overflow-hidden w-8 h-8 block'>
       <% if @event.master.image.attached? %>
         <%= image_tag @event.master.image, class: 'w-full h-full object-cover' %>
@@ -70,48 +70,60 @@
           <% end %>
         </div>
       <% end %>
-      <% if @event.master == current_user %>
-        <span class="isolate inline-flex rounded-md shadow-sm">
-          <%= link_to '編集', edit_event_path(@event),
-                      class: 'relative inline-flex items-center rounded-l-md bg-white px-3
-                        py-2 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300
-                        hover:bg-gray-50 focus:z-10' %>
-          <%= button_to '削除', event_path(@event), method: :delete,
-                                                  class: 'relative -ml-px inline-flex items-center bg-white px-3 py-2 font-semibold text-gray-900
-                                                    ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10',
-                                                  data: { turbo_confirm: '本当に削除しますか？削除したイベントは元に戻せません。' } %>
-          <%= link_to '申込状況を確認する', event_event_attendances_path(@event),
-                      class: 'relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 font-semibold text-gray-900
-                        ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10' %>
-        </span>
-      <% else %>
-        <div class="my-4">
-          <% if @attendance.present? %>
-            <div class="font-bold">ステータス</div>
-            <div>
-              <% if @attendance.requested? %>
-                <span class="block text-yellow-500 mb-2">申請中です</span>
-                <%= button_to 'キャンセル', event_event_attendance_path(event_id: @event.id, id: @attendance.id),
-                              name: 'canceled', method: :patch, params: { status: 'canceled' },
-                              class: 'relative -ml-px inline-flex items-center rounded-md bg-white
-                                px-3 py-2 font-semibold text-gray-900 ring-1 ring-inset
-                                ring-gray-300 hover:bg-gray-50 focus:z-10',
-                              data: { turbo_confirm: 'イベント参加申請をキャンセルしますか？一度キャンセルするとこのイベントには参加できません。' } %>
-              <% elsif  @attendance.canceled? %>
-                <span class="text-gray-500">キャンセルしました</span>
-              <% elsif  @attendance.approved? %>
-                <span class="text-green-500">承認されました</span>
+      <div class="flex justify-between items-center">
+        <% if @event.master == current_user %>
+          <span class="isolate inline-flex rounded-md shadow-sm">
+            <%= link_to '編集', edit_event_path(@event),
+                        class: 'relative inline-flex items-center rounded-l-md bg-white px-3
+                          py-2 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300
+                          hover:bg-gray-50 focus:z-10' %>
+            <%= button_to '削除', event_path(@event), method: :delete,
+                                                    class: 'relative -ml-px inline-flex items-center bg-white px-3 py-2 font-semibold text-gray-900
+                                                      ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10',
+                                                    data: { turbo_confirm: '本当に削除しますか？削除したイベントは元に戻せません。' } %>
+            <%= link_to '申込状況を確認する', event_event_attendances_path(@event),
+                        class: 'relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 font-semibold text-gray-900
+                          ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10' %>
+          </span>
+        <% else %>
+          <div class="my-4">
+            <% if @attendance.present? %>
+              <div class="font-bold">ステータス</div>
+              <div>
+                <% if @attendance.requested? %>
+                  <span class="block text-yellow-500 mb-2">申請中です</span>
+                  <%= button_to 'キャンセル', event_event_attendance_path(event_id: @event.id, id: @attendance.id),
+                                name: 'canceled', method: :patch, params: { status: 'canceled' },
+                                class: 'relative -ml-px inline-flex items-center rounded-md bg-white
+                                  px-3 py-2 font-semibold text-gray-900 ring-1 ring-inset
+                                  ring-gray-300 hover:bg-gray-50 focus:z-10',
+                                data: { turbo_confirm: 'イベント参加申請をキャンセルしますか？一度キャンセルするとこのイベントには参加できません。' } %>
+                <% elsif  @attendance.canceled? %>
+                  <span class="text-gray-500">キャンセルしました</span>
+                <% elsif  @attendance.approved? %>
+                  <span class="text-green-500">承認されました</span>
+                <% else %>
+                  <span class="text-red-500">拒否されました</span>
+                <% end %>
+              </div>
+            <% else %>
+              <% if @event.can_request? %>
+                <%= link_to '申し込む', new_event_event_attendance_path(@event), class: 'relative -ml-px inline-flex items-center rounded-md
+                            px-3 py-2 font-semibold text-white bg-blue-400 ring-1 ring-inset
+                            ring-blue-700 hover:opacity-80 focus:z-10 cursor-pointer mb-4' %>
               <% else %>
-                <span class="text-red-500">拒否されました</span>
+                <%= button_to '申し込む', '#', class: 'relative -ml-px inline-flex items-center rounded-md
+                            px-3 py-2 font-semibold text-white bg-gray-400 ring-1 ring-inset
+                            ring-gray-700 hover:opacity-80 focus:z-10 cursor-pointer mb-4',
+                                           data: { turbo_confirm: '定員に達しているため参加申し込みはできません' } %>
+              <% end %>
               <% end %>
             </div>
-          <% else %>
-            <%= link_to '申し込む', new_event_event_attendance_path(@event), class: 'relative -ml-px inline-flex items-center rounded-md
-                          px-3 py-2 font-semibold text-white bg-blue-400 ring-1 ring-inset
-                          ring-blue-700 hover:opacity-80 focus:z-10 cursor-pointer mb-4' %>
           <% end %>
+          <%= link_to 'トップに戻る', root_path, class: 'relative -ml-px inline-flex items-center rounded-md bg-white
+                          px-3 py-2 font-semibold text-gray-900 ring-1 ring-inset
+                          ring-gray-300 hover:bg-gray-50 focus:z-10' %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
-</div>
