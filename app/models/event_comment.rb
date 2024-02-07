@@ -10,8 +10,10 @@ class EventComment < ApplicationRecord
 
   def after_save_mention(new_mentions)
     new_mentions.each do |new_mention|
-      mentioned_name = new_mention[1..-1]
+      mentioned_name = new_mention[1..]
       mentioned_user = User.find_by(name: mentioned_name)
+
+      next unless mentioned_user
 
       EventMailer.with(mentioned_user:, event:, mentioning_user: user).event_comment_email.deliver_now
       Notification.create!(user: mentioned_user, message: "コメントで#{user.name}さんからメンションされました",

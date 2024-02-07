@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  NAME_REGEX = /\A[\w]+\z/
+  NAME_REGEX = /\A\w+\z/
 
   has_one_attached :image
   has_many :team_comments, dependent: :destroy
