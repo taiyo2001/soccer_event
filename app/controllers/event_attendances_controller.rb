@@ -7,24 +7,25 @@ class EventAttendancesController < ApplicationController
 
     @attendances = @event.event_attendances.order(created_at: :desc)
     @attendance_count = @attendances.count
-    @request_count = @attendances.where(status: 'request').count
-    @approve_count = @attendances.where(status: 'approve').count
-    @reject_count = @attendances.where(status: 'reject').count
+    @requested_count = @attendances.requested.count
+    @canceled_count = @attendances.canceled.count
+    @approved_count = @attendances.approved.count
+    @rejected_count = @attendances.rejected.count
   end
 
   def new
-    @attendance = EventAttendance.new
+    @attendance = EventAttendance.new(event_id: params[:event_id])
   end
 
   def create
     event = Event.find(params[:event_id])
-    @attendance = EventAttendance.new(attendance_create_params.merge(event:, status: 'request'))
+    @attendance = EventAttendance.new(attendance_create_params.merge(event:, status: 'requested'))
 
     if @attendance.save
       EventMailer.with(master: event.master, request_user: current_user, event:).request_email.deliver_now
       Notification.create!(user_id: event.master_id, message: "#{event.name}に#{current_user.name}さんから申請がありました",
                            url: SOCCER_EVENT_URL + Rails.application.routes.url_helpers.event_event_attendances_path(event))
-      redirect_to event
+      redirect_to event, notice: 'イベント申請が完了しました'
     else
       render :new
     end
@@ -37,9 +38,9 @@ class EventAttendancesController < ApplicationController
       EventMailer.with(event: attendance.event, request_user: attendance.user, status: attendance.status_text).attendance_email.deliver_now
       Notification.create!(user: attendance.user, message: "#{event.name}の申請が#{attendance.status_text}されました",
                            url: SOCCER_EVENT_URL + Rails.application.routes.url_helpers.event_path(event))
-      redirect_to event_event_attendances_path(event)
+      redirect_back fallback_location: root_path, notice: "#{attendance.status_text}しました"
     else
-      render :new
+      redirect_back fallback_location: root_path, alert: "#{attendance.status_text}に失敗しました"
     end
   end
 

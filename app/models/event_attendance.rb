@@ -4,5 +4,13 @@ class EventAttendance < ApplicationRecord
   belongs_to :event
   belongs_to :user
 
-  enumerize :status, in: %i[request approve reject], default: 'request', scope: :shallow, predicates: true
+  enumerize :status, in: %i[requested canceled approved rejected], default: 'requested', scope: :shallow, predicates: true
+
+  validate :status_must_be_requested
+
+  private
+
+  def status_must_be_requested
+    errors.add(:status, "cannot be changed unless it is 'requested'") unless status.requested?
+  end
 end

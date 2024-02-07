@@ -10,11 +10,18 @@
       <div class="absolute bottom-0.5 h-0.5 w-full <%= 'bg-blue-300' if request.path == '/' %>">
       </div>
     <% end %>
-    <%= link_to root_path, class: 'relative block h-16' do %>
-      <div class="h-full flex items-center px-4 <%= 'font-bold' if request.path == '/a' %>">
+    <%= link_to applied_events_path, class: 'relative block h-16' do %>
+      <div class="h-full flex items-center px-4 <%= 'font-bold' if request.path == '/events/applied' %>">
         応募済み
       </div>
-      <div class="absolute bottom-0.5 h-0.5 w-full <%= 'bg-blue-300' if request.path == '/a' %>">
+      <div class="absolute bottom-0.5 h-0.5 w-full <%= 'bg-blue-300' if request.path == '/events/applied' %>">
+      </div>
+    <% end %>
+        <%= link_to new_event_path, class: 'relative block h-16' do %>
+      <div class="h-full flex items-center px-4 <%= 'font-bold' if request.path == '/events/new' %>">
+        新規作成
+      </div>
+      <div class="absolute bottom-0.5 h-0.5 w-full <%= 'bg-blue-300' if request.path == '/events/new' %>">
       </div>
     <% end %>
   </div>
@@ -25,7 +32,7 @@
         <div class="mr-3"><%= link_to 'リーグ', leagues_path %>   /</div>
         <div class="mr-5"><%= link_to 'ユーザー', users_path %></div>
 
-        <%= search_form_for q, url: events_path do |f| %>
+        <%= search_form_for q, url: root_path do |f| %>
           <div class="relative">
             <%= f.search_field :name_or_address_or_place_cont, class: 'border h-9 w-80 rounded-lg pl-10 pr-4', placeholder: '募集中のイベントを探す' %>
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -41,7 +48,11 @@
       <div class="h-full flex items-center">
         <div class="font-bold"><%= current_user.name %></div>
         <%= link_to user_path(current_user), class: 'mx-2 rounded-full overflow-hidden w-12 h-12 block' do %>
-          <%= image_tag current_user.image, class: 'w-full h-full object-cover' if current_user.image.attached? %>
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: 'w-full h-full object-cover' %>
+          <% else %>
+            <div class='w-full h-full object-cover bg-gray-300'></div>
+          <% end %>
         <% end %>
         <div class="mr-3"><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></div>
       </div>

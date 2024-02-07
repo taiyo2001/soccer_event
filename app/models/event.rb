@@ -30,12 +30,16 @@ class Event < ApplicationRecord
     "#{days}日 #{hours}時間 #{minutes}分"
   end
 
+  def applied?(user)
+    event_attendances.where(user:).present?
+  end
+
   def approved_user?(user)
-    event_attendances.find_by(user:)&.approve?
+    event_attendances.find_by(user:)&.approved?
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[zipcode name address place price held_at created_at]
+    %w[zipcode name address place price people_limit held_at deadline_at created_at]
   end
 
   def self.ransackable_associations(_auth_object = nil)

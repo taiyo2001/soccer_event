@@ -3,9 +3,10 @@ ja:
   enumerize:
     event_attendance:
       status:
-        request: '申請中'
-        approve: '承認'
-        reject: '拒否'
+        requested: '申請中'
+        canceled: 'キャンセル済み'
+        approved: '承認'
+        rejected: '拒否'
   activerecord:
     errors:
       messages:

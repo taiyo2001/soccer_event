@@ -1,6 +1,6 @@
 EventAttendance.destroy_all
 
-STATUS = %w[request approve reject].freeze
+STATUS = %w[requested canceled approved rejected].freeze
 
 test_user_id = User.find_by(email: 'soccersample@example.com').id
 no_test_user_ids = User.where.not(id: test_user_id).pluck(:id)

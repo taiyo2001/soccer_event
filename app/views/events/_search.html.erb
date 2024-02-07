@@ -1,0 +1,75 @@
+<%= search_form_for @q, url: path do |f| %>
+  <div class="flex" data-controller="modal">
+    <div>
+      <table>
+        <tr>
+          <th class="w-60 font-normal">
+            <%= f.label :name_or_address_or_place_cont, 'フリーワード' %>
+          </th>
+          <td class="w-96">
+            <%= f.search_field :name_or_address_or_place_cont, placeholder: '公園 東京 運動', class: 'border w-full rounded-lg' %>
+          </td>
+        </tr>
+        <tr>
+          <th class="font-normal">
+            <%= f.label :zipcode_prefecture_name_eq, '都道府県' %>
+          </th>
+          <td>
+            <%= f.collection_select :zipcode_prefecture_name_eq, @prefectures, :name, :name, { include_blank: '' }, { class: 'border rounded-lg  w-full' } %>
+          </td>
+        </tr>
+        <tr>
+          <th class="font-normal">
+            <%= f.label :held_at_gteq, '開催日' %>
+          </th>
+          <td>
+            <%= f.date_field :held_at_gteq, class: 'border rounded-lg' %>
+            <span class="font-bold mx-2">~</span>
+            <%= f.date_field :held_at_lteq_end_of_day, class: 'border rounded-lg' %>
+          </td>
+        </tr>
+      </table>
+      <div class="<%= @modal_open ? '' : 'hidden' %>" data-modal-target="modal">
+        <p class="my-4 border-b border-gray-500 text-center">詳細条件</p>
+        <table>
+          <tr>
+            <th class="w-60 font-normal">
+              <%= f.label :price_gteq, '参加費用' %>
+            </th>
+            <td>
+              <%= f.number_field :price_gteq, class: 'border rounded-lg w-20' %>
+              <span class="font-bold mx-2">~</span>
+              <%= f.number_field :price_lteq, class: 'border rounded-lg w-20' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="w-60 font-normal">
+              <%= f.label :people_limit_gteq, '最大参加人数' %>
+            </th>
+            <td>
+              <%= f.number_field :people_limit_gteq, class: 'border rounded-lg w-20' %>
+              <span class="font-bold mx-2">~</span>
+              <%= f.number_field :people_limit_lteq, class: 'border rounded-lg w-20' %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="flex flex-col justify-center items-center">
+        <div class="mb-4">
+          <div class="inline-block w-20">
+            <%= f.sort_link :deadline_at, '締切順', class: 'inline-block' %>
+          </div>
+          <div class="inline-block w-20">
+            <%= f.sort_link :created_at, '新着順', class: 'inline-block' %>
+          </div>
+        </div>
+        <div class="w-64 text-center">
+          <%= f.submit '検索', class: 'font-bold text-white bg-blue-500 rounded px-4 py-2 mb-4' %>
+        </div>
+        <div class="underline cursor-pointer" data-action="click->modal#toggleModal">さらに絞り込む</div>
+      </div>
+    </div>
+  </div>
+<% end %>
