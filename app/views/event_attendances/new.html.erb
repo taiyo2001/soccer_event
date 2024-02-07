@@ -6,13 +6,23 @@
                           px-3 py-2 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10' %>
   </div>
   <div>
-    <h3>イベント内容</h3>
-    <p>hogehogehgoegheo</p>
+    <div class="my-4 border-b pb-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-x-4">
+        <div class="sm:col-span-2">
+          <div class="font-bold">イベント名</div>
+          <div><%= @attendance.event.name %></div>
+        </div>
+        <div class="sm:col-span-2">
+          <div class="font-bold">イベント詳細内容</div>
+          <div><%= @attendance.event.description %></div>
+        </div>
+      </div>
+    </div>
   </div>
   <%= form_with(model: @attendance, url: event_event_attendances_path, method: :post, data: { turbo: false }) do |form| %>
     <%= render partial: 'form', locals: { form: } %>
     <div class="">
-      <%= form.submit '作成', class: 'font-bold text-white bg-green-500 p-2 rounded-lg cursor-pointer' %>
+      <%= form.submit '申請', class: 'font-bold text-white bg-green-500 p-2 rounded-lg cursor-pointer' %>
     </div>
   <% end %>
 </div>
