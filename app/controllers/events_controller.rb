@@ -1,13 +1,21 @@
 class EventsController < ApplicationController
+  skip_before_action :set_search_event_form, only: %i[applied]
+  before_action :search_modal_open?, only: %i[index applied]
+
   def index
     # TODO: フリーワードでスペース区切りでできるようにする
+    @q = current_user.not_applied_events.open.ransack(params[:q])
+    @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
     @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
     @prefectures = Prefecture.all
   end
 
-  def search
-    @q = Event.open.ransack(params[:q])
-    @events = @q.result(distinct: true).order(created_at: :desc).page(params[:page])
+  def applied
+    # TODO: フリーワードでスペース区切りでできるようにする
+    @q = current_user.applied_events.open.ransack(params[:q])
+    @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
+    @prefectures = Prefecture.all
   end
 
   def new
@@ -31,7 +39,7 @@ class EventsController < ApplicationController
     @event.address = @event.zipcode_address + @event.other_address if @event.zipcode_address.present? && @event.other_address.present?
 
     if @event.save
-      redirect_to @event
+      redirect_to @event, notice: 'イベントを作成しました'
     else
       render :new
     end
@@ -67,7 +75,7 @@ class EventsController < ApplicationController
     @event.address = @event.zipcode_address + @event.other_address if @event.zipcode_address.present? && @event.other_address.present?
 
     if @event.update(event_update_params)
-      redirect_to @event
+      redirect_to @event, notice: 'イベントを更新しました'
     else
       render :edit
     end
@@ -77,7 +85,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.destroy
-      redirect_to root_path, notice: 'Event was successfully deleted.'
+      redirect_to root_path, notice: 'イベントを削除しました'
     else
       flash[:alert] = 'Failed to delete the event.'
       render :show
@@ -93,5 +101,13 @@ class EventsController < ApplicationController
 
   def event_update_params
     params.require(:event).permit(:name, :zipcode_id, :zipcode_address, :other_address, :place, :price, :people_limit, :description)
+  end
+
+  def search_modal_open?
+    @modal_open = params[:q].present? &&
+                  (params[:q][:price_gteq].present? ||
+                    params[:q][:price_lteq].present? ||
+                    params[:q][:people_limit_gteq].present? ||
+                    params[:q][:people_limit_lteq].present?)
   end
 end
