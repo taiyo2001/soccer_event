@@ -2,8 +2,9 @@ class EventsController < ApplicationController
   skip_before_action :set_search_event_form, only: %i[applied]
   before_action :search_modal_open?, only: %i[index applied]
 
+  # TODO: 各イベントリストを返すエンドポイントでフリーワードでスペース区切りでできるようにする
+
   def index
-    # TODO: フリーワードでスペース区切りでできるようにする
     @q = current_user.not_applied_events.open.ransack(params[:q])
     @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
     @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
@@ -11,9 +12,29 @@ class EventsController < ApplicationController
   end
 
   def applied
-    # TODO: フリーワードでスペース区切りでできるようにする
     @q = current_user.applied_events.open.ransack(params[:q])
     @q.sorts = 'created_at asc' if params[:q].blank? || params[:q][:s].blank?
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
+    @prefectures = Prefecture.all
+  end
+
+  def attendance
+    @q = current_user.events.approved.ransack(params[:q])
+    @q.sorts = 'held_at asc' if params[:q].blank? || params[:q][:s].blank?
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
+    @prefectures = Prefecture.all
+  end
+
+  def mine
+    @q = current_user.events.ransack(params[:q])
+    @q.sorts = 'held_at desc' if params[:q].blank? || params[:q][:s].blank?
+    @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
+    @prefectures = Prefecture.all
+  end
+
+  def favorite
+    @q = current_user.favorite_events.ransack(params[:q])
+    @q.sorts = 'held_at asc' if params[:q].blank? || params[:q][:s].blank?
     @events = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
     @prefectures = Prefecture.all
   end
