@@ -3,7 +3,7 @@
     <div class="mb-4">
       <span class="rounded text-sm inline-block mr-4">作成日時: <%= l @event.created_at, format: :long_ja %></span>
       <span class="rounded text-sm inline-block mr-4">開催日時: <%= l @event.held_at, format: :long_ja %></span>
-      <span class="rounded text-sm inline-block mr-4">参加人数: <%= @event.event_attendances.approve.count %> / <%= @event.people_limit %></span>
+      <span class="rounded text-sm inline-block mr-4">参加人数: <%= @event.event_attendances.approved.count %> / <%= @event.people_limit %></span>
     </div>
     <h2 class="font-bold text-3xl mb-6 pl-6"><%= @event.name %></h2>
     <%= link_to @event.master, class: 'flex items-center inline-block' do %>

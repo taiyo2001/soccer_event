@@ -10,7 +10,7 @@ User.create!(
 
 50.times do |i|
   User.create!(
-    name: "#{Faker::Games::Pokemon.name}#{i + 1}号",
+    name: "DevUser#{i + 1}",
     email: "sample#{i + 1}@example.com",
     password: 'password',
     age: rand(20..60),
