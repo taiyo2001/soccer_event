@@ -1,10 +1,28 @@
 <%= link_to event, class: 'block rounded-lg bg-white' do %>
   <div class="py-4 px-6 bg-white">
     <h3 class="text-2xl font-bold mb-2"><%= event.name %></h3>
-    <span class="rounded text-sm inline-block mr-4">開催日時: <%= l event.held_at, format: :long_ja %></span>
-    <span class="rounded text-sm inline-block">締切日時: <%= l event.deadline_at, format: :long_ja %></span>
+    <div class="mb-1">
+      <span class="rounded text-sm inline-block mr-4">開催日時: <%= l event.held_at, format: :long_ja %></span>
+      <span class="rounded text-sm inline-block">締切日時: <%= l event.deadline_at, format: :long_ja %></span>
+    </div>
     <div class="mb-4">
-      <span class="px-1 text-red-500 rounded border border-red-500">締切までのこり: <%= event.calc_time_remaining %></span>
+      <% if attendance.present? %>
+        <span>申込状況:
+          <span class="border-2 rounded-lg p-1 <%= if attendance.requested?
+                                                     'text-blue-500 border-blue-500'
+                                                   elsif attendance.canceled?
+                                                     'text-gray-500 border-gray-500'
+                                                   elsif attendance.approved?
+                                                     'text-green-500 border-green-500'
+                                                   else
+                                                     'text-red-500 border-red-500'
+                                                   end %>">
+            <%= attendance.status_text %>
+          </span>
+        </span>
+      <% else %>
+        <span class="px-1 text-red-500 rounded border border-red-500">締切までのこり: <%= event.calc_time_remaining %></span>
+      <% end %>
     </div>
     <div class="flex">
       <div>開催場所: </div>
@@ -15,7 +33,7 @@
     </div>
     <div class="mb-4">
       <span class="rounded text-sm inline-block mr-4">参加費用: <%= event.price %></span>
-      <span class="rounded text-sm inline-block">制限人数: <%= event.event_attendances.approve.count %> / <%= event.people_limit %></span>
+      <span class="rounded text-sm inline-block">最大参加人数: <%= event.event_attendances.approved.count %> / <%= event.people_limit %></span>
     </div>
     <div class="flex">
       <div class="flex items-center mr-20">
@@ -38,7 +56,6 @@
             <%= render 'favorites/unfavorite', event: %>
           </div>
         <% end %>
-
         <span id="favorite-count<%= event.id %>"><%= Favorite.where(event:).count %></span>
       </div>
     </div>

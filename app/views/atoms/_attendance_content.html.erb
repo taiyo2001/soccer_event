@@ -1,27 +1,47 @@
-
-      <tr>
-        <td class="py-4 px-6 border-b border-gray-300">
-          <span class="block font-semibold text-xs"><%= attendance.user.name %></span>
-        </td>
-        <td class="py-4 px-6 border-b border-gray-300">
-          <span class="block text-xs mb-2 text-gray-500"><%= l attendance.created_at, format: :long_ja %></span>
-        </td>
-        <td class="py-4 px-6 border-b border-gray-300">
-          <span class="text-red-500"><%= attendance.status_text %></span>
-        </td>
-        <td class="py-4 px-6 border-b border-gray-300">
-          <span class="mb-2"><%= attendance.note %></span>
-        </td>
-        <td class="py-4 px-6 border-b border-gray-300">
-      <%= button_to '承認',
-                    event_event_attendance_path(event_id: @event.id, id: attendance.id),
-                    name: 'approve', method: :patch, params: { status: 'approve' },
-                    class: 'font-bold text-white bg-green-500 p-2 rounded-lg',
-                    data: { turbo_confirm: '承認しますか？' } %>
-
-      <%= button_to '拒否', event_event_attendance_path(event_id: @event.id, id: attendance.id),
-                    name: 'reject', method: :patch, params: { status: 'reject' },
-                    class: 'font-bold text-white bg-red-500 p-2 rounded-lg',
-                    data: { turbo_confirm: '拒否しますか？' } %>
-        </td>
-      </tr>
+<tr>
+  <td class="py-4 px-6 border-b border-gray-300 text-center">
+    <span class="block font-semibold text-xs"><%= attendance.user.name %></span>
+  </td>
+  <td class="py-4 px-6 border-b border-gray-300 text-center">
+    <span class="block text-xs mb-2 text-gray-500"><%= l attendance.created_at, format: :long_ja %></span>
+  </td>
+  <td class="py-4 px-6 border-b border-gray-300 text-center">
+    <span class="<%= if attendance.requested?
+                       'text-blue-500'
+                     elsif attendance.canceled?
+                       'text-gray-500'
+                     elsif attendance.approved?
+                       'text-green-500'
+                     else
+                       'text-red-500'
+                     end %>">
+      <%= attendance.status_text %>
+    </span>
+  </td>
+  <td class="py-4 px-6 border-b border-gray-300">
+    <span class="mb-2"><%= attendance.note %></span>
+  </td>
+  <td class="py-4 px-6 border-b border-gray-300">
+    <div class="flex justify-center">
+      <% if attendance.requested? %>
+        <%= button_to '承認',
+                      event_event_attendance_path(event_id: @event.id, id: attendance.id),
+                      name: 'approved', method: :patch, params: { status: 'approved' },
+                      class: 'font-bold text-white bg-green-500 p-2 rounded-lg mr-2',
+                      data: { turbo_confirm: '承認しますか？一度申請すると取り消しはできません。' } %>
+      <% else %>
+        <%= button_to '承認', '#', class: 'font-bold text-white bg-gray-400 p-2 rounded-lg mr-2 cursor-not-allowed',
+                                 data: { turbo_confirm: '申請中の申請しか申込状況を更新できません。' } %>
+      <% end %>
+      <% if attendance.requested? %>
+        <%= button_to '拒否', event_event_attendance_path(event_id: @event.id, id: attendance.id),
+                      name: 'rejected', method: :patch, params: { status: 'rejected' },
+                      class: 'font-bold text-white bg-red-500 p-2 rounded-lg',
+                      data: { turbo_confirm: '拒否しますか？一度拒否すると取り消しはできません。' } %>
+      <% else %>
+        <%= button_to '拒否', '#', class: 'font-bold text-white bg-gray-400 p-2 rounded-lg mr-2 cursor-not-allowed',
+                                 data: { turbo_confirm: '申請中の申請しか申込状況を更新できません。' } %>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,14 +1,16 @@
 <div class="p-2">
+  <div class="flex justify-between mb-4">
   <h2 class="font-bold text-3xl">イベント申請一覧</h2>
-  <div>
-      <%= link_to '戻る', event_path(@event), class: 'font-bold text-white bg-blue-500 border border-green-500 p-2 rounded-lg' %>
+     <%= link_to 'イベント詳細に戻る', event_path(@event),
+                 class: 'relative -ml-px inline-flex items-center rounded-md bg-white
+                          px-3 py-2 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10' %>
   </div>
   <div>
     <span>応募数: <%= @attendance_count %></span>
-    <span>承認数: <%= @approve_count %></span>
-    <span>申請中数: <%= @request_count %></span>
-    <span>拒否数: <%= @reject_count %></span>
-    <span>キャンセル数: </span>
+    <span>承認数: <%= @approved_count %></span>
+    <span>申請中数: <%= @requested_count %></span>
+    <span>拒否数: <%= @rejected_count %></span>
+    <span>キャンセル数: <%= @canceled_count %></span>
   </div>
   <div>
     <table class="min-w-full bg-white border border-gray-300">

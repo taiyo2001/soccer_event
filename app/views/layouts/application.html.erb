@@ -12,7 +12,6 @@
   </head>
   <body>
     <%= render partial: 'layouts/header', locals: { q: @q } %>
-
     <main class="pt-10 bg-blue-50">
       <% if notice %>
         <p class="text-green-500 text-center mb-3"><%= notice %></p>
@@ -20,10 +19,12 @@
       <% if alert %>
         <p class="text-red-500 text-center mb-3"><%= alert %></p>
       <% end %>
-
-      <%= yield %>
+      <div class="flex justify-center">
+        <div class="max-w-6xl w-full px-4">
+          <%= yield %>
+        </div>
+      </div>
     </main>
-
     <%= render 'layouts/footer' %>
   </body>
 </html>
