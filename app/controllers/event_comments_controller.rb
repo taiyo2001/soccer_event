@@ -1,7 +1,7 @@
 class EventCommentsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
-    return redirect_to root_path, alert: 'access denied.' unless @event.master == current_user || @event.approved_user?(current_user)
+    # return redirect_to root_path, alert: 'access denied.' unless @event.master == current_user || @event.approved_user?(current_user)
 
     @comments = @event.event_comments.order(created_at: :desc)
     @comment = EventComment.new
