@@ -1,3 +1,5 @@
+require_relative './en_faker'
+
 # 認証にはdeviseを使用
 # test user
 User.create!(
@@ -10,7 +12,7 @@ User.create!(
 
 50.times do |i|
   User.create!(
-    name: "DevUser#{i + 1}",
+    name: "#{EnFaker::Games::Pokemon.name}#{i + 1}",
     email: "sample#{i + 1}@example.com",
     password: 'password',
     age: rand(20..60),
