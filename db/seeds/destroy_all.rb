@@ -5,3 +5,4 @@ Event.destroy_all
 EventAttendance.destroy_all
 EventComment.destroy_all
 Favorite.destroy_all
+Notification.destroy_all

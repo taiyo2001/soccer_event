@@ -11,6 +11,6 @@ class EventAttendance < ApplicationRecord
   private
 
   def status_must_be_requested
-    errors.add(:status, "cannot be changed unless it is 'requested'") unless status.requested?
+    errors.add(:status, "cannot be changed unless it is 'requested'") unless status_changed? && status_was == 'requested'
   end
 end
