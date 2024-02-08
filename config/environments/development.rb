@@ -69,7 +69,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # TODO: アプリのURLを本番のドメインに変更する
-  config.action_mailer.default_url_options = { protocol: 'https', host: 'アプリのURL' }
+  config.action_mailer.default_url_options = { protocol: 'https', host: ENV.fetch('MINSAKA_HOST', nil) }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     port: 587,
