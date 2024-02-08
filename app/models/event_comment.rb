@@ -1,6 +1,4 @@
 class EventComment < ApplicationRecord
-  SOCCER_EVENT_URL = 'http://localhost:3000'.freeze
-
   mentionable_as :content
 
   belongs_to :event
@@ -17,7 +15,7 @@ class EventComment < ApplicationRecord
 
       EventMailer.with(mentioned_user:, event:, mentioning_user: user).event_comment_email.deliver_now
       Notification.create!(user: mentioned_user, message: "コメントで#{user.name}さんからメンションされました",
-                           url: SOCCER_EVENT_URL + Rails.application.routes.url_helpers.event_path(event))
+                           url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.event_path(event))
     end
   end
 end

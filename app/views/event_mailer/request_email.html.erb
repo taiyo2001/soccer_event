@@ -5,6 +5,6 @@
   </head>
   <body>
     <h1><%= @request_user.name %>から<%= @event.name %>への参加申請が届きました</h1>
-    <p><a href="http://localhost:3000/events/<%= @event.id %>/event_attendances">サイト</a>で参加申請を確認しましょう。</p>
+    <p><a href="<%= ENV.fetch('MINSAKA_URL', nil) %>/events/<%= @event.id %>/event_attendances">サイト</a>で参加申請を確認しましょう。</p>
   </body>
 </html>
