@@ -32,6 +32,8 @@ class Event < ApplicationRecord
   end
 
   def can_request?
+    return true if people_limit.nil?
+
     people_limit > event_attendances.approved.count
   end
 
