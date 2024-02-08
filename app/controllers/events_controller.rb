@@ -52,7 +52,7 @@ class EventsController < ApplicationController
       zipcode = Zipcode.find_by(id: event_create_params[:zipcode_id])
       @event.errors.add(:zipcode_id, '郵便番号を再検索してください') if zipcode.nil?
 
-      @event.zipcode_address = "#{zipcode.prefecture&.name}#{zipcode.city&.name}#{zipcode.town&.name}"
+      @event.zipcode_address = "#{zipcode&.prefecture&.name}#{zipcode&.city&.name}#{zipcode.town&.name}" if zipcode.present?
       @event.zipcode = zipcode
       return render :new
     end
