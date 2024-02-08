@@ -1,9 +1,18 @@
 <div class="p-2 border w-full">
-  <div>
-    <span class="<%= comment.user == current_user ? 'text-blue-500' : '' %>">
-      <%= comment.event.master == comment.user ? '主催者: ' : '参加者: ' %><%= comment.user.name %>
-    </span>
-    <%= l comment.created_at, format: :long_ja %>
+  <div class="flex mb-2">
+    <div class="mr-8 <%= comment.user == current_user ? 'text-blue-500' : '' %>">
+      <span class="inline-block ml-2">
+        <%= if comment.event.master == comment.user
+              '主催者: '
+            elsif comment.event.event_attendances.find_by(user: comment.user)&.approved?
+              '参加者: '
+            else
+              '未参加者: '
+            end %>
+      </span>
+      <span><%= comment.user.name %></span>
+    </div>
+    <span class="text-sm text-gray-700"><%= l comment.created_at, format: :long_ja %></span>
   </div>
   <div>
     <%= comment.content %>

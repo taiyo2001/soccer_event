@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :favorites, only: %i[create destroy]
     collection do
       get 'applied'
+      get 'attendance'
+      get 'mine'
+      get 'favorite'
     end
   end
 
