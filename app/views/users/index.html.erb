@@ -8,7 +8,33 @@
       <% @users.each do |user| %>
         <div class="w-1/4">
           <div class="border m-3">
-            <%= render user %>
+            <div class="p-5">
+              <% if user.image.attached? %>
+                <div class="flex justify-center">
+                  <%= image_tag(user.image.variant(resize_to_limit: [100, 100])) %>
+                </div>
+              <% end %>
+
+              <p>
+                <strong>名前:</strong>
+                <%= user.name %>
+              </p>
+
+              <p>
+                <strong>Eメール:</strong>
+                <%= user.email %>
+              </p>
+
+              <p>
+                <strong>年齢:</strong>
+                <%= user.age %>
+              </p>
+
+              <p>
+                <strong>性別</strong>
+                <%= user.gender %>
+              </p>
+            </div>
 
             <div class="text-right p-2">
               <%= link_to "#{user.name}の詳細", user_path(user), class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline text-right block' %>
