@@ -15,6 +15,7 @@ gem 'turbo-rails'
 gem 'i18n_generators'
 gem 'jbuilder'
 gem 'kaminari'
+gem 'mentionable'
 gem 'tailwindcss-rails'
 
 gem 'enumerize'

@@ -6,7 +6,7 @@ class EventAttendance < ApplicationRecord
 
   enumerize :status, in: %i[requested canceled approved rejected], default: 'requested', scope: :shallow, predicates: true
 
-  validate :status_must_be_requested
+  validate :status_must_be_requested, unless: :new_record?
 
   private
 

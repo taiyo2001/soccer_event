@@ -1,5 +1,3 @@
-League.destroy_all
-
 League.create!(name: 'プレミアリーグ')
 League.create!(name: 'ラ・リーガ')
 League.create!(name: 'セリエA')

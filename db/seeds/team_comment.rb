@@ -1,5 +1,3 @@
-TeamComment.destroy_all
-
 Team.all.each do |_v|
   team_comment_counts = [*4..10].sample
   users = User.all.to_a

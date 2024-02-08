@@ -1,4 +1,4 @@
-<div class="h-screen w-screen flex justify-center">
+<div class="flex justify-center">
   <div class="flex flex-col">
     <div class="mb-3">
       <h2 class="text-3xl">
@@ -10,7 +10,7 @@
       <%= render 'devise/shared/error_messages', resource: %>
 
       <div class="mb-2 field">
-        <%= f.label :name %><br>
+        <%= f.label :name %><span>(半角英数と_のみ)</span><br>
         <%= f.text_field :name, autofocus: true %>
       </div>
 

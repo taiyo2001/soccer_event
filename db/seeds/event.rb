@@ -1,8 +1,6 @@
 require 'faker'
 require 'gimei'
 
-Event.destroy_all
-
 PLACE = %w[スタジアム フィールド 公園 空き地].freeze
 
 user_ids = User.all.pluck(:id)
