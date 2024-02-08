@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, only: %i[index show] do
-    resources :notifications, only: %i[index]
+    resources :notifications, only: %i[index show]
   end
   resources :team_comments, only: %i[create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

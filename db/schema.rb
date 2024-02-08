@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_07_065252) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_08_053536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_065252) do
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_unread", default: true, null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 

@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   private
 
   def fetch_notifications
-    @notifications = Notification.where(user: current_user).order(created_at: :desc).limit(4)
+    @unread_notifications = Notification.unread
   end
 end

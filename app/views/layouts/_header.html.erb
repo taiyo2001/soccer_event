@@ -43,7 +43,7 @@
         <% end %>
       </div>
 
-      <%= render 'layouts/notification', notifications: @notifications %>
+      <%= render 'layouts/notification', notifications: @unread_notifications %>
 
       <div class="h-full flex items-center">
         <div class="font-bold"><%= current_user.name %></div>
