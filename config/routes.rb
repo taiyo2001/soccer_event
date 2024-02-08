@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show] do
+    resources :notifications, only: %i[index]
+  end
   resources :team_comments, only: %i[create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
