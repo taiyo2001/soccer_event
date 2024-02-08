@@ -5,6 +5,6 @@
   </head>
   <body>
     <h1><%= @event.name %>の参加申請が<%= @status %>されました。</h1>
-    <p><a href="<%= ENV.fetch('MINSAKA_URL', nil) %>/events/<%= @event.id %>">サイト</a>でチェックしましょう</p>
+    <p><a href="<%= Rails.application.credentials[:minsaka_url] %>/events/<%= @event.id %>">サイト</a>でチェックしましょう</p>
   </body>
 </html>

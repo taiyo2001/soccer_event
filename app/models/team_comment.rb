@@ -15,7 +15,7 @@ class TeamComment < ApplicationRecord
 
       EventMailer.with(mentioned_user:, team:, mentioning_user: user).team_comment_email.deliver_now
       Notification.create!(user: mentioned_user, message: "コメントで#{user.name}さんからメンションされました",
-                           url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.team_path(team))
+                           url: Rails.application.credentials[:minsaka_url] + Rails.application.routes.url_helpers.team_path(team))
     end
   end
 end
