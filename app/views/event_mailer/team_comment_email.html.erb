@@ -5,6 +5,6 @@
   </head>
   <body>
     <h1>コメントで<%= @mentioning_user.name %>さんからメンションされました</h1>
-    <p><a href="<%= ENV.fetch('MINSAKA_URL', nil) %>/teams/<%= @team.id %>">サイト</a>でチェックしましょう</p>
+    <p><a href="<%= Rails.application.credentials[:minsaka_url] %>/teams/<%= @team.id %>">サイト</a>でチェックしましょう</p>
   </body>
 </html>

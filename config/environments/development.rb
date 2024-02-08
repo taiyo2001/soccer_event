@@ -69,15 +69,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # TODO: アプリのURLを本番のドメインに変更する
-  config.action_mailer.default_url_options = { protocol: 'https', host: ENV.fetch('MINSAKA_HOST', nil) }
+  config.action_mailer.default_url_options = { protocol: 'https', host: Rails.application.credentials[:minsaka_host] }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port: 587,
-    address: 'smtp.gmail.com',
-    domain: 'gmail.com',
-    user_name: ENV.fetch('YOUR_GMAIL_ADDRESS', nil),
-    password: ENV.fetch('YOUR_GMAIL_PASSWORD', nil),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  config.action_mailer.smtp_settings = Rails.application.credentials.smtp
 end

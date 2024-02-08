@@ -24,7 +24,7 @@ class EventAttendancesController < ApplicationController
     if @attendance.save
       EventMailer.with(master: event.master, request_user: current_user, event:).request_email.deliver_now
       Notification.create!(user_id: event.master_id, message: "#{event.name}に#{current_user.name}さんから申請がありました",
-                           url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.event_event_attendances_path(event))
+                           url: Rails.application.credentials[:minsaka_url] + Rails.application.routes.url_helpers.event_event_attendances_path(event))
       redirect_to event, notice: 'イベント申請が完了しました'
     else
       render :new
@@ -38,7 +38,7 @@ class EventAttendancesController < ApplicationController
       notification_user = attendance.canceled? ? event.master : attendance.user
       EventMailer.with(event: attendance.event, request_user: notification_user, status: attendance.status_text).attendance_email.deliver_now
       Notification.create!(user: notification_user, message: "#{event.name}の申請が#{attendance.status_text}されました",
-                           url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.event_path(event))
+                           url: Rails.application.credentials[:minsaka_url] + Rails.application.routes.url_helpers.event_path(event))
       redirect_back fallback_location: root_path, notice: "#{attendance.status_text}しました"
     else
       redirect_back fallback_location: root_path, alert: "#{attendance.status_text}に失敗しました"

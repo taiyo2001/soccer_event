@@ -15,7 +15,7 @@ class EventComment < ApplicationRecord
 
       EventMailer.with(mentioned_user:, event:, mentioning_user: user).event_comment_email.deliver_now
       Notification.create!(user: mentioned_user, message: "コメントで#{user.name}さんからメンションされました",
-                           url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.event_path(event))
+                           url: Rails.application.credentials[:minsaka_url] + Rails.application.routes.url_helpers.event_path(event))
     end
   end
 end
