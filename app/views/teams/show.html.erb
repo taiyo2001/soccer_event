@@ -17,6 +17,10 @@
       <% @team.new_comments.each do |comment| %>
         <%= render 'share/comment', comment: %>
       <% end %>
+
+      <div class="flex justify-end">
+        <%= link_to 'コメントをもっと見る', team_team_comments_path(@team), class: 'text-sky-500' %>
+      </div>
     </div>
 
     <% if @team_comment.errors.any? %>
