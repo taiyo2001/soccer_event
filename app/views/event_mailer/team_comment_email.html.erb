@@ -5,6 +5,6 @@
   </head>
   <body>
     <h1>コメントで<%= @mentioning_user.name %>さんからメンションされました</h1>
-    <p><a href="http://localhost:3000/teams/<%= @team.id %>">サイト</a>でチェックしましょう</p>
+    <p><a href="<%= ENV.fetch('MINSAKA_URL', nil) %>/teams/<%= @team.id %>">サイト</a>でチェックしましょう</p>
   </body>
 </html>
