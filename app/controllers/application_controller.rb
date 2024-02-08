@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_search_event_form
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :fetch_notifications
+  before_action :fetch_notifications, if: :user_signed_in?
 
   protected
 
