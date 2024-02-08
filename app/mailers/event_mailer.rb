@@ -14,4 +14,18 @@ class EventMailer < ApplicationMailer
     @status = params[:status]
     mail(to: @request_user.email, subject: "イベントが#{@status}されました")
   end
+
+  def event_comment_email
+    @mentioned_user = params[:mentioned_user]
+    @mentioning_user = params[:mentioning_user]
+    @event = params[:event]
+    mail(to: @mentioned_user.email, subject: "コメントで#{@mentioning_user.name}さんからメンションされました")
+  end
+
+  def team_comment_email
+    @mentioned_user = params[:mentioned_user]
+    @mentioning_user = params[:mentioning_user]
+    @team = params[:team]
+    mail(to: @mentioned_user.email, subject: "コメントで#{@mentioning_user.name}さんからメンションされました")
+  end
 end

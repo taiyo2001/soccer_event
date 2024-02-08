@@ -1,18 +1,21 @@
-<% if notifications.present? %>
-  <div class="h-full flex items-center mr-8">
-    <div class="relative group">
-      <div>
-        <h1><i class="fa-solid fa-bell fa-lg"></i></h1>
-      </div>
-      <div class="absolute invisible group-hover:visible bg-white border shadow w-60 dark:bg-gray-700 z-10 divide-gray-100 rounded-lg divide-y">
-        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-          <% notifications.each do |notification| %>
-            <li>
-              <%= link_to notification.message, notification.url, class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+<div class="h-full flex items-center mr-8">
+  <div class="relative group">
+    <div>
+      <h1><i class="fa-solid fa-bell fa-lg"></i></h1>
+    </div>
+    <div class="absolute invisible group-hover:visible bg-white border shadow w-60 dark:bg-gray-700 z-10 divide-gray-100 rounded-lg divide-y">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+        <% notifications.each do |notification| %>
+          <li>
+            <%= link_to notification.message, notification.url, class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
+          </li>
+        <% end %>
+
+        <li>
+          <%= link_to 'すべての通知を見る', user_notifications_path(current_user),
+                      class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
+        </li>
+      </ul>
     </div>
   </div>
-<% end %>
+</div>

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  NAME_REGEX = /\A\w+\z/
+
   has_one_attached :image
   has_many :team_comments, dependent: :destroy
   has_many :events, dependent: :destroy, foreign_key: 'master_id'
@@ -11,7 +13,7 @@ class User < ApplicationRecord
 
   belongs_to :favorite_team, class_name: 'Team', optional: true
 
-  validates :name, presence: true, length: { maximum: 250 }
+  validates :name, presence: true, length: { maximum: 250 }, uniqueness: true, format: { with: NAME_REGEX }
   validates :age, presence: true, numericality: { only_integer: true }
   validates :gender, presence: true
 

@@ -1,0 +1,17 @@
+<div class="m-3">
+  <div class="m-3">
+    <h2 class="text-2xl">このチームへのコメント一覧</h2>
+  </div>
+
+  <% @team_comments.each do |team_comment| %>
+    <%= render 'share/comment', comment: team_comment %>
+  <% end %>
+</div>
+
+<div class="flex justify-center">
+  <%= link_to '戻る', :back, class: 'bg-gray-600 hover:bg-gray-500 text-white rounded block px-4 py-2 mb-2' %>
+</div>
+
+<div class="flex justify-center">
+  <%= paginate @team_comments %>
+</div>

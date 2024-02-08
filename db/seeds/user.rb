@@ -1,4 +1,4 @@
-User.destroy_all
+require_relative './en_faker'
 
 # 認証にはdeviseを使用
 # test user
@@ -12,7 +12,7 @@ User.create!(
 
 50.times do |i|
   User.create!(
-    name: Faker::Games::Pokemon.name,
+    name: "#{EnFaker::Games::Pokemon.name}#{i + 1}",
     email: "sample#{i + 1}@example.com",
     password: 'password',
     age: rand(20..60),
