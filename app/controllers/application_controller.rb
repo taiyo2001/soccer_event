@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   private
 
   def fetch_notifications
-    @unread_notifications = Notification.unread
+    @unread_notifications = current_user.notifications.unread
   end
 end
