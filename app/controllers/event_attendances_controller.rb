@@ -35,8 +35,9 @@ class EventAttendancesController < ApplicationController
     event = Event.find(params[:event_id])
     attendance = event.event_attendances.find(params[:id])
     if attendance.update(status: params[:status])
-      EventMailer.with(event: attendance.event, request_user: attendance.user, status: attendance.status_text).attendance_email.deliver_now
-      Notification.create!(user: attendance.user, message: "#{event.name}の申請が#{attendance.status_text}されました",
+      notification_user = attendance.canceled? ? event.master : attendance.user
+      EventMailer.with(event: attendance.event, request_user: notification_user, status: attendance.status_text).attendance_email.deliver_now
+      Notification.create!(user: notification_user, message: "#{event.name}の申請が#{attendance.status_text}されました",
                            url: ENV.fetch('MINSAKA_URL', nil) + Rails.application.routes.url_helpers.event_path(event))
       redirect_back fallback_location: root_path, notice: "#{attendance.status_text}しました"
     else

@@ -10,7 +10,7 @@
       <%= render 'devise/shared/error_messages', resource: %>
 
       <div class="mb-2 field">
-        <%= f.label :name %><br>
+        <%= f.label :name %><span>(半角英数と_のみ)</span><br>
         <%= f.text_field :name, autofocus: true %>
       </div>
 
@@ -31,8 +31,7 @@
 
       <div class="mb-2 field">
         <%= f.label :favorite_team %><br>
-        <%# TODO: 正しいデータをセットする %>
-        <%= f.select :favorite_team_id, { 'バルセロナ': 1, 'レアル・マドリード': 2 }, { include_blank: '選択してください' }, autofocus: true %>
+        <%= f.select :favorite_team_id, Team.fetch_teams, { include_blank: '選択してください' }, autofocus: true %>
       </div>
 
       <div class="mb-2 field">

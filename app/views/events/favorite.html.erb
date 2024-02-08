@@ -1,18 +1,16 @@
 <div class="flex justify-center">
   <div class="max-w-6xl w-full px-4">
     <div class="bg-blue-100 p-6 rounded-lg">
-      <%= render 'search', locals: { q: @q }, path: root_path %>
+      <%= render 'search', locals: { q: @q }, path: favorite_events_path %>
     </div>
     <div class="bg-blue-50 w-full py-20">
-      <h3 class="mb-8 font-semibold">募集中</h3>
+      <h3 class="mb-8 font-semibold">お気に入りのイベント</h3>
       <% @events.each do |event| %>
         <div class="mb-4">
           <%= render 'atoms/event_content', event:, attendance: event.event_attendances.find_by(user: current_user) %>
         </div>
       <% end %>
-      <div class="flex justify-center">
-        <%= paginate @events %>
-      </div>
+      <%= paginate @events %>
     </div>
   </div>
 </div>
