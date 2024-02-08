@@ -3,7 +3,7 @@ class Team < ApplicationRecord
   has_many :team_comments, dependent: :destroy
   belongs_to :league
 
-  TEAM_COUNTS = 5
+  TEAM_COUNTS = 10
   TEAM_COMMENT_COUNTS = 5
 
   def new_comments
@@ -11,7 +11,7 @@ class Team < ApplicationRecord
   end
 
   def self.fetch_teams
-    teams = Team.all.limit(TEAM_COUNTS)
+    teams = order(id: :asc).limit(TEAM_COUNTS)
 
     team_hash = {}
     teams.each do |team|

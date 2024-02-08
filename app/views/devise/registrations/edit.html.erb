@@ -10,7 +10,7 @@
       <%= render 'devise/shared/error_messages', resource: %>
 
       <div class="mb-2 field">
-        <%= f.label :name %><br>
+        <%= f.label :name %><span>(半角英数と_のみ)</span><br>
         <%= f.text_field :name, autofocus: true %>
       </div>
 
