@@ -67,7 +67,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
+    return redirect_to root_path, alert: 'イベントは削除されています' if @event.nil?
+
     @attendance = @event.event_attendances.find_by(user: current_user)
     @is_approve = @event.approved_user?(current_user)
     @comments = @event.event_comments.order(created_at: :desc).limit(5)
